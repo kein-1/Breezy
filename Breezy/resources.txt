@@ -1,0 +1,3 @@
+1. https://stackoverflow.com/questions/62552209/pure-mvvm-with-swiftui-corelocation - reference for location manager via dependency injection into view model (service-oriented-architecture)
+
+2. https://stackoverflow.com/questions/51263128/how-should-i-use-mvvm-and-dependency-injection-when-i-need-to-fetch-a-controller - great reference for dependency injection
