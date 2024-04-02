@@ -15,15 +15,12 @@ struct HomeView : View {
     var body: some View {
         ScrollView {
             LazyVStack {
-                if !homeViewModel.locationManager.userApprovedStatus {
-                    Text("i am approved!")
-                } else {
-                    Button("Press me ") {
-                        print(homeViewModel.locationManager.userApprovedStatus)
-                        Task {
-                            await homeViewModel.getData(lon:"40.712776", lat: "-74.005974")
-                        }
+                if homeViewModel.places.isEmpty {
+                    Button("Get current location") {
+                        Text("Location: \(homeViewModel.locationManager.location)")
                     }
+                } else {
+                    
                 }
             }
         }

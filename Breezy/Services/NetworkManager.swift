@@ -25,13 +25,12 @@ enum APIErrors: Error {
 
 /// Main network manager used to make API calls
 class NetworkManager: NetworkService {
+    
     func getPollutionData(lon: String, lat: String) async throws -> AirQuality {
-        
         
         guard let key = ProcessInfo.processInfo.environment["API_KEY"] else {
             throw APIErrors.invalidAPIKey
         }
-        
         
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/air_pollution?lat=\(lat)&lon=\(lon)&appid=\(key)") else {
             throw NetworkErrors.invalidURL
