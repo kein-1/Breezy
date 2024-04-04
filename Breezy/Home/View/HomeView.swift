@@ -16,8 +16,21 @@ struct HomeView : View {
         ScrollView {
             LazyVStack {
                 if homeViewModel.places.isEmpty {
-                    Button("Get current location") {
-                        Text("Location: \(homeViewModel.locationManager.location)")
+                    VStack{
+                        
+                        
+                        
+                        Button("Get current location") {
+                            Task {
+                                await homeViewModel.retrieveLocationAndUpdate()
+                            }
+                        }
+                        if homeViewModel.currentLocationAQ != nil {
+                            Text("i am good!!!")
+                            
+                        } else {
+                            Text("sometjhing else")
+                        }
                     }
                 } else {
                     
@@ -28,7 +41,7 @@ struct HomeView : View {
     }
 }
 
-
-#Preview {
-   HomeView()
-}
+//
+//#Preview {
+//   HomeView()
+//}

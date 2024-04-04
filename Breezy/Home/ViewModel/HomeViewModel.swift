@@ -19,7 +19,6 @@ protocol ViewModel {
     var locationManager: Location { get set }
     
     init(networkManager: Network, locationManager: Location)
-    func getData(lon: String, lat: String) async
 }
 
 
@@ -35,6 +34,11 @@ class HomeViewModel: ViewModel {
     typealias Location = LocationService
     
     var places = [AirQuality]()
+    var currentLocationAQ : AirQuality? {
+        didSet {
+            print("changed")
+        }
+    }
     var networkManager : NetworkService
     var locationManager: LocationService
     
@@ -44,11 +48,14 @@ class HomeViewModel: ViewModel {
     }
     
     
-    func getData(lon: String, lat: String) async {
+    func getData(lon: Double, lat: Double, updateCurrentLocation: Bool) async {
         do {
             let airQuality = try await networkManager.getPollutionData(lon: lon, lat: lat)
-            print(airQuality)
-            places.append(airQuality)
+            if updateCurrentLocation {
+                currentLocationAQ = airQuality
+            } else {
+                places.append(airQuality)
+            }
         }  catch let error as NetworkErrors  {
             print("error in network call")
         } catch APIErrors.invalidAPIKey {
@@ -58,7 +65,18 @@ class HomeViewModel: ViewModel {
         }
     }
     
-   
+    
+    /// Update user's current location and data
+    func retrieveLocationAndUpdate() async {
+        
+        guard let locationData = locationManager.getCurrentLocation() else {
+            print("not available")
+            return
+        }
+        let (lon,lat) = (locationData.coordinate.longitude, locationData.coordinate.latitude)
+        await getData(lon: lon, lat: lat, updateCurrentLocation: true)
+        print("home")
+    }
     
 }
 

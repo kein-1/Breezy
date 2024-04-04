@@ -9,8 +9,8 @@ import Foundation
 
 // MARK: - Protocol for Network Services
 protocol NetworkService {
-    func getPollutionData(lon: String, lat: String) async throws -> AirQuality
-    func getHistoricalData(lon: String, lat: String) async throws -> AirQuality
+    func getPollutionData(lon: Double, lat: Double) async throws -> AirQuality
+    func getHistoricalData(lon: Double, lat: Double) async throws -> AirQuality
 }
     
 
@@ -26,7 +26,7 @@ enum APIErrors: Error {
 /// Main network manager used to make API calls
 class NetworkManager: NetworkService {
     
-    func getPollutionData(lon: String, lat: String) async throws -> AirQuality {
+    func getPollutionData(lon: Double, lat: Double) async throws -> AirQuality {
         
         guard let key = ProcessInfo.processInfo.environment["API_KEY"] else {
             throw APIErrors.invalidAPIKey
@@ -47,7 +47,7 @@ class NetworkManager: NetworkService {
         return airQuality
     }
     
-    func getHistoricalData(lon: String, lat: String) async throws -> AirQuality {
+    func getHistoricalData(lon: Double, lat: Double) async throws -> AirQuality {
         // TODO: - write method
         return airQualityMock
     }
