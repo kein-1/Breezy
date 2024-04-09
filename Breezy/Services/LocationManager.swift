@@ -11,35 +11,39 @@ import CoreLocation
 
 protocol LocationService {
     var manager : CLLocationManager { get }
-    var location: CLLocation? { get }
+    var currLocation: CLLocation? { get }
     var authStatus: CLAuthorizationStatus { get }
-    func getCurrentLocation() -> CLLocation?
-    
+    func getLocation() -> CLLocation?
+    var threshold : CLLocationDistance { get }
+    var lastUpdated : Bool { get }
+//    func performGeoReverse() ->
 }
 
 @Observable
 class LocationManager: NSObject, LocationService {
     
-    var manager : CLLocationManager = CLLocationManager()
-    private (set) var location: CLLocation? = nil
+    var manager: CLLocationManager = CLLocationManager()
+    private (set) var currLocation: CLLocation? = nil
     var authStatus: CLAuthorizationStatus = CLAuthorizationStatus.denied
+    var threshold : CLLocationDistance = 300
+    var lastUpdated : Bool = false
     
-    override init() {
+    // singleton design for sharing
+    static let shared = LocationManager()
+    
+    private override init() {
         super.init()
-        manager.desiredAccuracy = kCLLocationAccuracyBest // set best location acc
-        manager.distanceFilter = 100 // provide updates only after moving 100 meters
+        manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         manager.delegate = self // utilize delegate pattern
     }
     
-    func getCurrentLocation() -> CLLocation? {
+    
+    func getLocation() -> CLLocation? {
         checkAuthorization()
-        return location
+        return currLocation
     }
         
     private func checkAuthorization()  {
-        
-        
-        print(authStatus.rawValue)
         
         switch manager.authorizationStatus {
             case .notDetermined:
@@ -48,8 +52,8 @@ class LocationManager: NSObject, LocationService {
                 print("restricted !")
             case .denied:
                 manager.requestWhenInUseAuthorization()
-                print("denied !")
             case .authorizedAlways, .authorizedWhenInUse:
+            print("in use")
                 manager.requestLocation() // immediately calls delegate function locationManager(_:didUpdateLocation    s:) defined below
             @unknown default:
                 print("unknown")
@@ -68,24 +72,34 @@ extension LocationManager : CLLocationManagerDelegate {
     ///   - manager: the location manager that generated the updated event
     ///   - locations: array of updated locations. most recent is at the end
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("running update location delegate")
         guard let latestLocation = locations.last else {
             print("lastlast")
             return
         }
-        print("the location has been updated")
-        self.location = latestLocation
+        
+        guard let currLocation = self.currLocation else {
+            self.currLocation = latestLocation
+            self.lastUpdated = true
+            return
+        }
+        
+        print("ran here")
+        if currLocation.distance(from: latestLocation) > self.threshold {
+            self.lastUpdated = true
+        } else {
+            self.lastUpdated = false
+        }
+        self.currLocation = latestLocation
     }
-    
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        print("ran123")
+        print("running auth delegate")
         checkAuthorization()
-        print("this running")
-        self.authStatus = manager.authorizationStatus
     }
 }
 

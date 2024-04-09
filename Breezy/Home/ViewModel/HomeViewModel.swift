@@ -14,11 +14,16 @@ protocol ViewModel {
     
     associatedtype Network
     associatedtype Location
+    typealias LocationName = String
     
     var networkManager : Network { get set }
     var locationManager: Location { get set }
     
     init(networkManager: Network, locationManager: Location)
+    
+    var places : [(AirQuality,LocationName)] { get set }
+    var currentLocationAQ : (AirQuality,LocationName)?  { get set }
+    func retrieveLocationAndUpdate() async -> Void
 }
 
 
@@ -33,12 +38,11 @@ class HomeViewModel: ViewModel {
     typealias Network = NetworkService
     typealias Location = LocationService
     
-    var places = [AirQuality]()
-    var currentLocationAQ : AirQuality? {
-        didSet {
-            print("changed")
-        }
-    }
+    
+    var places = [(AirQuality,LocationName)]()
+    var currentLocationAQ : (AirQuality,LocationName)?
+    
+    
     var networkManager : NetworkService
     var locationManager: LocationService
     
@@ -47,15 +51,16 @@ class HomeViewModel: ViewModel {
         self.locationManager = locationManager
     }
     
+    var location : CLLocation? {
+        return locationManager.currLocation ?? nil
+    }
     
-    func getData(lon: Double, lat: Double, updateCurrentLocation: Bool) async {
+    
+    
+    func getData(lon: Double, lat: Double) async -> AirQuality? {
         do {
             let airQuality = try await networkManager.getPollutionData(lon: lon, lat: lat)
-            if updateCurrentLocation {
-                currentLocationAQ = airQuality
-            } else {
-                places.append(airQuality)
-            }
+            return airQuality
         }  catch let error as NetworkErrors  {
             print("error in network call")
         } catch APIErrors.invalidAPIKey {
@@ -63,20 +68,26 @@ class HomeViewModel: ViewModel {
         } catch {
             print(error)
         }
+        return nil
     }
     
     
-    /// Update user's current location and data
+    
+    /// Retrieve user's prev/curr location, then make network call if either prev location is null or the distance between the curr and last is more than the threshold
     func retrieveLocationAndUpdate() async {
+        guard let currentLocation = locationManager.getLocation() else { return }
         
-        guard let locationData = locationManager.getCurrentLocation() else {
-            print("not available")
-            return
+        print(locationManager.lastUpdated)
+        if locationManager.lastUpdated  {
+            print("updating aq")
+            let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
+            guard let airQuality = await getData(lon: lon, lat: lat) else { return }
+            self.currentLocationAQ = (airQuality, "")
         }
-        let (lon,lat) = (locationData.coordinate.longitude, locationData.coordinate.latitude)
-        await getData(lon: lon, lat: lat, updateCurrentLocation: true)
-        print("home")
+        return
     }
+    
+    
     
 }
 

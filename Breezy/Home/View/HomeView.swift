@@ -10,7 +10,8 @@ import CoreLocation
 
 struct HomeView : View {
     
-    @State var homeViewModel = HomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager())
+    
+    @State var homeViewModel = HomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
     var body: some View {
         ScrollView {
@@ -18,15 +19,13 @@ struct HomeView : View {
                 if homeViewModel.places.isEmpty {
                     VStack{
                         
-                        
-                        
                         Button("Get current location") {
                             Task {
                                 await homeViewModel.retrieveLocationAndUpdate()
                             }
                         }
                         if homeViewModel.currentLocationAQ != nil {
-                            Text("i am good!!!")
+                            Text("not nil")
                             
                         } else {
                             Text("sometjhing else")
