@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C0C6B692BCC8524001738DA /* Placemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B682BCC8524001738DA /* Placemark.swift */; };
 		8C3073F62BB89F350031D69E /* resources.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8C3073F52BB89F350031D69E /* resources.txt */; };
 		8C5CBFEF2BB38454004080B9 /* BreezyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5CBFEE2BB38454004080B9 /* BreezyApp.swift */; };
 		8C5CBFF12BB38454004080B9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5CBFF02BB38454004080B9 /* ContentView.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C0C6B682BCC8524001738DA /* Placemark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placemark.swift; sourceTree = "<group>"; };
 		8C3073F52BB89F350031D69E /* resources.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = resources.txt; sourceTree = "<group>"; };
 		8C5CBFEB2BB38454004080B9 /* Breezy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breezy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5CBFEE2BB38454004080B9 /* BreezyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreezyApp.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				8C7B97782BB38650005A7712 /* AirQuality.swift */,
+				8C0C6B682BCC8524001738DA /* Placemark.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				8C7B978C2BB66977005A7712 /* MainView.swift in Sources */,
 				8C5CBFF12BB38454004080B9 /* ContentView.swift in Sources */,
 				8C7B97792BB38650005A7712 /* AirQuality.swift in Sources */,
+				8C0C6B692BCC8524001738DA /* Placemark.swift in Sources */,
 				8C7B978A2BB66936005A7712 /* LandingView.swift in Sources */,
 				8C7B97852BB62188005A7712 /* HomeView.swift in Sources */,
 				8C7B97832BB61FD0005A7712 /* HomeViewModel.swift in Sources */,

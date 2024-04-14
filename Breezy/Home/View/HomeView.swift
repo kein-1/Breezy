@@ -10,8 +10,8 @@ import CoreLocation
 
 struct HomeView : View {
     
-    
     @State var homeViewModel = HomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    
     
     var body: some View {
         ScrollView {
@@ -21,14 +21,16 @@ struct HomeView : View {
                         
                         Button("Get current location") {
                             Task {
-                                await homeViewModel.retrieveLocationAndUpdate()
+                                await homeViewModel.retrieveLocationAndUpdateData()
                             }
                         }
                         if homeViewModel.currentLocationAQ != nil {
-                            Text("not nil")
-                            
+                            Text(homeViewModel.currentLocationAQ?.1.name ?? "")
+                            Text(homeViewModel.currentLocationAQ?.1.administrativeArea ?? "")
+                            Text(homeViewModel.currentLocationAQ?.1.country ?? "")
+                            Text(homeViewModel.currentLocationAQ?.1.locality ?? "")
                         } else {
-                            Text("sometjhing else")
+                           Text("AQ Nil")
                         }
                     }
                 } else {
@@ -36,6 +38,7 @@ struct HomeView : View {
                 }
             }
         }
+        
         
     }
 }

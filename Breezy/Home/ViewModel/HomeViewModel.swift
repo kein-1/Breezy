@@ -14,16 +14,16 @@ protocol ViewModel {
     
     associatedtype Network
     associatedtype Location
-    typealias LocationName = String
+    associatedtype PlaceData
     
     var networkManager : Network { get set }
     var locationManager: Location { get set }
     
     init(networkManager: Network, locationManager: Location)
     
-    var places : [(AirQuality,LocationName)] { get set }
-    var currentLocationAQ : (AirQuality,LocationName)?  { get set }
-    func retrieveLocationAndUpdate() async -> Void
+    var places : [(AirQuality,PlaceData)] { get set }
+    var currentLocationAQ : (AirQuality,PlaceData)?  { get set }
+    func retrieveLocationAndUpdateData() async -> Void
 }
 
 
@@ -37,10 +37,10 @@ class HomeViewModel: ViewModel {
     // I.e maybe we have some other service or implementation we want to use
     typealias Network = NetworkService
     typealias Location = LocationService
+    typealias PlaceData = Placemark
     
-    
-    var places = [(AirQuality,LocationName)]()
-    var currentLocationAQ : (AirQuality,LocationName)?
+    var places = [(AirQuality,PlaceData)]()
+    var currentLocationAQ : (AirQuality,PlaceData)?
     
     
     var networkManager : NetworkService
@@ -51,43 +51,28 @@ class HomeViewModel: ViewModel {
         self.locationManager = locationManager
     }
     
-    var location : CLLocation? {
-        return locationManager.currLocation ?? nil
-    }
     
     
-    
-    func getData(lon: Double, lat: Double) async -> AirQuality? {
+    /// Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
+    func retrieveLocationAndUpdateData() async {
+        guard let currentLocation = locationManager.getLocation() else { return }
+        
         do {
-            let airQuality = try await networkManager.getPollutionData(lon: lon, lat: lat)
-            return airQuality
-        }  catch let error as NetworkErrors  {
+            if locationManager.lastUpdated  {
+                print("updating aq")
+                let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
+                let airQuality = try await networkManager.getPollutionData(lon: lon, lat: lat)
+                guard let placemark = await locationManager.performGeoReverse() else { return }
+                self.currentLocationAQ = (airQuality, placemark)
+            }
+        } catch let error as NetworkErrors  {
             print("error in network call")
         } catch APIErrors.invalidAPIKey {
             print("error in api-key")
         } catch {
             print(error)
         }
-        return nil
     }
-    
-    
-    
-    /// Retrieve user's prev/curr location, then make network call if either prev location is null or the distance between the curr and last is more than the threshold
-    func retrieveLocationAndUpdate() async {
-        guard let currentLocation = locationManager.getLocation() else { return }
-        
-        print(locationManager.lastUpdated)
-        if locationManager.lastUpdated  {
-            print("updating aq")
-            let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
-            guard let airQuality = await getData(lon: lon, lat: lat) else { return }
-            self.currentLocationAQ = (airQuality, "")
-        }
-        return
-    }
-    
-    
     
 }
 

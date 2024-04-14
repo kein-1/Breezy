@@ -16,10 +16,9 @@ protocol LocationService {
     func getLocation() -> CLLocation?
     var threshold : CLLocationDistance { get }
     var lastUpdated : Bool { get }
-//    func performGeoReverse() ->
+    func performGeoReverse() async -> Placemark?
 }
 
-@Observable
 class LocationManager: NSObject, LocationService {
     
     var manager: CLLocationManager = CLLocationManager()
@@ -27,9 +26,7 @@ class LocationManager: NSObject, LocationService {
     var authStatus: CLAuthorizationStatus = CLAuthorizationStatus.denied
     var threshold : CLLocationDistance = 300
     var lastUpdated : Bool = false
-    
-    // singleton design for sharing
-    static let shared = LocationManager()
+    static var shared = LocationManager()
     
     private override init() {
         super.init()
@@ -44,7 +41,7 @@ class LocationManager: NSObject, LocationService {
     }
         
     private func checkAuthorization()  {
-        
+
         switch manager.authorizationStatus {
             case .notDetermined:
                 manager.requestWhenInUseAuthorization()
@@ -58,6 +55,31 @@ class LocationManager: NSObject, LocationService {
             @unknown default:
                 print("unknown")
             }
+    }
+    
+    
+    /// Uses current CLLocation and retrieves a human readable content
+    /// - Returns: A Placemark model
+    func performGeoReverse() async -> Placemark? {
+        guard let currLocation = currLocation else { return nil }
+        
+        do {
+            let geoCoder = CLGeocoder()
+            let placemarks = try await geoCoder.reverseGeocodeLocation(currLocation, preferredLocale: nil)
+            let result = ""
+            for placemark in placemarks {
+                let name = placemark.name ?? "Unknown"
+                let locality = placemark.locality ?? "Unknown"
+                let administrativeArea = placemark.administrativeArea ?? "Unknown"
+                let country = placemark.country ?? "Unknown"
+                
+                let placeMark = Placemark(name: name, locality: locality, administrativeArea: administrativeArea, country: country)
+                return placeMark
+            }
+        } catch {
+            
+        }
+        return nil
     }
     
 }

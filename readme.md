@@ -1,4 +1,8 @@
 App design and architecture considerations:
 - Protocols for services - allows dependency injection and easily switch between real and mock for testing
-- Singleton - singleton design for the location manager since two view models needed to access the same data. Trade off is that we are using a singleton design, so there is a tight coupling and shared state amongst the two view models. During initialization of each view model, I am passing in the shared state
- 
+
+
+Design issues I faced:
+- Ran into a few errors with trying to use @Environment in a parent view, then passing that to the child view which owns the view model and then injecting that into the view model. This is not allowed since the environment object is available when the body of the view is called
+
+- Sharing an instance of location manager between two view models. Used a Singleton design as a result and then injected it into the view model. Could be a bad design 

@@ -10,6 +10,10 @@ import SwiftUI
 struct ContentView: View {
     
     @State var tagVal = 0
+    
+    
+    
+    
     var body: some View {
         TabView {
             HomeView()
