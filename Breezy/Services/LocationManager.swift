@@ -63,21 +63,20 @@ class LocationManager: NSObject, LocationService {
     func performGeoReverse() async -> Placemark? {
         guard let currLocation = currLocation else { return nil }
         
-        do {
-            let geoCoder = CLGeocoder()
-            let placemarks = try await geoCoder.reverseGeocodeLocation(currLocation, preferredLocale: nil)
-            let result = ""
-            for placemark in placemarks {
-                let name = placemark.name ?? "Unknown"
-                let locality = placemark.locality ?? "Unknown"
-                let administrativeArea = placemark.administrativeArea ?? "Unknown"
-                let country = placemark.country ?? "Unknown"
+        let geoCoder = CLGeocoder()
+        guard let placemarks = try? await geoCoder.reverseGeocodeLocation(currLocation, preferredLocale: nil) else {
+            print("error in reverse geocode")
+            return nil
+        }
                 
-                let placeMark = Placemark(name: name, locality: locality, administrativeArea: administrativeArea, country: country)
-                return placeMark
-            }
-        } catch {
+        for placemark in placemarks {
+            let name = placemark.name ?? "Unknown"
+            let locality = placemark.locality ?? "Unknown"
+            let administrativeArea = placemark.administrativeArea ?? "Unknown"
+            let country = placemark.country ?? "Unknown"
             
+            let placeMark = Placemark(name: name, locality: locality, administrativeArea: administrativeArea, country: country)
+            return placeMark
         }
         return nil
     }
