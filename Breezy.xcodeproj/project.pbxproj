@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8C0C6B692BCC8524001738DA /* Placemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B682BCC8524001738DA /* Placemark.swift */; };
+		8C0C6B6B2BCD9D5A001738DA /* PollutantTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B6A2BCD9D5A001738DA /* PollutantTheme.swift */; };
+		8C0C6B6F2BCDC143001738DA /* PollutantCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B6E2BCDC143001738DA /* PollutantCard.swift */; };
+		8C0C6B712BCDD906001738DA /* PollutantSubCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B702BCDD906001738DA /* PollutantSubCard.swift */; };
 		8C3073F62BB89F350031D69E /* resources.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8C3073F52BB89F350031D69E /* resources.txt */; };
 		8C5CBFEF2BB38454004080B9 /* BreezyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5CBFEE2BB38454004080B9 /* BreezyApp.swift */; };
 		8C5CBFF12BB38454004080B9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5CBFF02BB38454004080B9 /* ContentView.swift */; };
@@ -44,6 +47,9 @@
 
 /* Begin PBXFileReference section */
 		8C0C6B682BCC8524001738DA /* Placemark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placemark.swift; sourceTree = "<group>"; };
+		8C0C6B6A2BCD9D5A001738DA /* PollutantTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutantTheme.swift; sourceTree = "<group>"; };
+		8C0C6B6E2BCDC143001738DA /* PollutantCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutantCard.swift; sourceTree = "<group>"; };
+		8C0C6B702BCDD906001738DA /* PollutantSubCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutantSubCard.swift; sourceTree = "<group>"; };
 		8C3073F52BB89F350031D69E /* resources.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = resources.txt; sourceTree = "<group>"; };
 		8C5CBFEB2BB38454004080B9 /* Breezy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breezy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5CBFEE2BB38454004080B9 /* BreezyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreezyApp.swift; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 			children = (
 				8C7B97782BB38650005A7712 /* AirQuality.swift */,
 				8C0C6B682BCC8524001738DA /* Placemark.swift */,
+				8C0C6B6A2BCD9D5A001738DA /* PollutantTheme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -190,6 +197,8 @@
 				8C7B97842BB62188005A7712 /* HomeView.swift */,
 				8C7B97892BB66936005A7712 /* LandingView.swift */,
 				8C7B978B2BB66977005A7712 /* MainView.swift */,
+				8C0C6B6E2BCDC143001738DA /* PollutantCard.swift */,
+				8C0C6B702BCDD906001738DA /* PollutantSubCard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -327,14 +336,17 @@
 			files = (
 				8C7B977C2BB3B14D005A7712 /* NetworkManager.swift in Sources */,
 				8C7B978C2BB66977005A7712 /* MainView.swift in Sources */,
+				8C0C6B6B2BCD9D5A001738DA /* PollutantTheme.swift in Sources */,
 				8C5CBFF12BB38454004080B9 /* ContentView.swift in Sources */,
 				8C7B97792BB38650005A7712 /* AirQuality.swift in Sources */,
 				8C0C6B692BCC8524001738DA /* Placemark.swift in Sources */,
 				8C7B978A2BB66936005A7712 /* LandingView.swift in Sources */,
+				8C0C6B712BCDD906001738DA /* PollutantSubCard.swift in Sources */,
 				8C7B97852BB62188005A7712 /* HomeView.swift in Sources */,
 				8C7B97832BB61FD0005A7712 /* HomeViewModel.swift in Sources */,
 				8C7B978E2BB67B08005A7712 /* LocationManager.swift in Sources */,
 				8C5CBFEF2BB38454004080B9 /* BreezyApp.swift in Sources */,
+				8C0C6B6F2BCDC143001738DA /* PollutantCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

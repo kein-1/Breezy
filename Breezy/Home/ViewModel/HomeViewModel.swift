@@ -14,15 +14,14 @@ protocol ViewModel {
     
     associatedtype Network
     associatedtype Location
-    associatedtype PlaceData
     
-    var networkManager : Network { get set }
-    var locationManager: Location { get set }
+    var networkManager : Network { get }
+    var locationManager: Location { get }
     
     init(networkManager: Network, locationManager: Location)
     
-    var places : [(AirQuality,PlaceData)] { get set }
-    var currentLocationAQ : (AirQuality,PlaceData)?  { get set }
+    var places : [(AirQuality,Placemark)] { get }
+    var currAQ : (AirQuality,Placemark)?  { get }
     func retrieveLocationAndUpdateData() async -> Void
 }
 
@@ -37,10 +36,17 @@ class HomeViewModel: ViewModel {
     // I.e maybe we have some other service or implementation we want to use
     typealias Network = NetworkService
     typealias Location = LocationService
-    typealias PlaceData = Placemark
     
-    var places = [(AirQuality,PlaceData)]()
-    var currentLocationAQ : (AirQuality,PlaceData)?
+    var places = [(AirQuality,Placemark)]()
+    private (set) var currAQ : (AirQuality,Placemark)?
+    
+    var _currAQData: AirQuality {
+        currAQ?.0 ?? AirQuality.mockAQ
+    }
+    
+    var _currPlaceData: Placemark{
+        currAQ?.1 ?? Placemark.mockPlacemark
+    }
     
     
     var networkManager : NetworkService
@@ -63,7 +69,7 @@ class HomeViewModel: ViewModel {
                 let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
                 let airQuality = try await networkManager.getPollutionData(lon: lon, lat: lat)
                 guard let placemark = await locationManager.performGeoReverse() else { return }
-                self.currentLocationAQ = (airQuality, placemark)
+                self.currAQ = (airQuality, placemark)
             }
         } catch let error as NetworkErrors  {
             print("error in network call")
@@ -75,6 +81,3 @@ class HomeViewModel: ViewModel {
     }
     
 }
-
-
-

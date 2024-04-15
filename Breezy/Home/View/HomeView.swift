@@ -10,25 +10,22 @@ import CoreLocation
 
 struct HomeView : View {
     
-    @State var homeViewModel = HomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    @State var homeVM = HomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
     
     var body: some View {
         ScrollView {
             LazyVStack {
-                if homeViewModel.places.isEmpty {
+                if homeVM.places.isEmpty {
                     VStack{
                         
                         Button("Get current location") {
                             Task {
-                                await homeViewModel.retrieveLocationAndUpdateData()
+                                await homeVM.retrieveLocationAndUpdateData()
                             }
                         }
-                        if homeViewModel.currentLocationAQ != nil {
-                            Text(homeViewModel.currentLocationAQ?.1.name ?? "")
-                            Text(homeViewModel.currentLocationAQ?.1.administrativeArea ?? "")
-                            Text(homeViewModel.currentLocationAQ?.1.country ?? "")
-                            Text(homeViewModel.currentLocationAQ?.1.locality ?? "")
+                        if homeVM.currAQ != nil {
+                            PollutantCard(aq: homeVM._currAQData)
                         } else {
                            Text("AQ Nil")
                         }
