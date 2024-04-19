@@ -10,23 +10,59 @@ import SwiftUI
 struct PollutantSubCard: View {
     
     let name: String
-    let color: Color
+    let nameSub: String
     let value: Double
+    var colorStr : String
+    
+    var color: Color {
+        switch colorStr {
+        case "Green":
+            Color.green
+        case "Teal":
+            Color.teal
+        case "Orange":
+            Color.orange
+        case "Purple":
+            Color.purple
+        default:
+            Color.red
+        }
+    }
+    
+    @State var showText = false
     
     var body: some View {
         HStack {
-            Text(name)
-            ProgressView(value: value)
+            HStack {
+                Text(name)
+                    .font(.system(size: 14))
+                Text(nameSub).font(.system(size: 12))
+                    .offset(x:-7, y:5)
+                    .overlay {
+                       Popover(showText: $showText)
+                    }
+                    .onTapGesture {
+                        showText.toggle()
+                    }
+            }
+            .frame(minWidth: 50, maxWidth: .infinity)
+            
+            ProgressView(value: value, total: 0)
                 .tint(self.color)
-                .scaleEffect(x:1, y:2, anchor: .center)
-            Text(value, format: .number)
-            
-            
+                .progressViewStyle(.myCustomStyle)
+                .frame(minWidth: 0, maxWidth: .infinity)
+            Text(String(format: "%.0f", value))
+                .frame(minWidth: 40, maxWidth: .infinity)
+                .font(.system(size: 14))
         }
         .padding()
+        .background {
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .strokeBorder(.black, lineWidth: 1)
+        }
     }
 }
-
-#Preview {
-    PollutantSubCard(name: "PM2.5", color: Color.teal, value: 80)
-}
+//
+//#Preview {
+//    PollutantSubCard(name: "PM2.5", color: Color.teal, value: 80)
+//}

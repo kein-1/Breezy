@@ -14,7 +14,7 @@ struct AirQuality: Codable {
     let coord: Coord
     let list: [PrimaryData]
     var color: String {
-        switch self._aqi {
+        switch self._aqi.0 {
             case 1:
                 "Green"
             case 2:
@@ -29,7 +29,7 @@ struct AirQuality: Codable {
     }
     
     var description: String {
-        switch self._aqi {
+        switch self._aqi.0 {
             case 1:
                 "Good"
             case 2:
@@ -84,127 +84,35 @@ struct Pollutants: Codable {
 // MARK: - Retrieving properties
 extension AirQuality {
     
-    var _co: (Double,String) {
-        (self.list[0].pollutants.co, "co")
+    var _co: Double {
+        self.list[0].pollutants.co
     }
     
-    var _no2:  (Double,String) {
-        (self.list[0].pollutants.no2,"no2")
+    var _no2: Double {
+        self.list[0].pollutants.no2
     }
     
-    var _pm10:  (Double,String) {
-        (self.list[0].pollutants.pm10, "pm10")
+    var _pm10:  Double{
+        self.list[0].pollutants.pm10
     }
     
-    var _pm25:  (Double,String) {
-        (self.list[0].pollutants.pm25,"pm2.5")
+    var _pm25: Double {
+        self.list[0].pollutants.pm25
     }
     
-    var _o3:  (Double,String) {
-        (self.list[0].pollutants.o3,"o3")
+    var _o3:  Double {
+        self.list[0].pollutants.o3
     }
     
-    var _so2:  (Double,String) {
-        (self.list[0].pollutants.so2, "so2")
+    var _so2: Double {
+        self.list[0].pollutants.so2
     }
     
-    var _aqi :  (Double,String) {
+    var _aqi :  (Int,String) {
         (self.list[0].main.aqi, "AQI")
     }
 }
 
-// MARK: - Thresholds
-extension AirQuality {
-    var _coThreshold: (Double,Double) {
-        switch self._aqi {
-        case 1:
-            (0,4400)
-        case 2:
-            (4400,9400)
-        case 3:
-            (9400,12400)
-        case 4:
-            (12400,15400)
-        default:
-            (15400,25000)
-        }
-    }
-    
-    var _no2Threshold: (Double, Double) {
-        switch self._aqi {
-        case 1:
-            return (0, 40)
-        case 2:
-            return (40, 70)
-        case 3:
-            return (70, 150)
-        case 4:
-            return (150, 200)
-        default:
-            return (200, 300)
-        }
-    }
-    
-    var _pm10Threshold: (Double, Double) {
-        switch self._aqi {
-        case 1:
-            return (0, 20)
-        case 2:
-            return (20, 50)
-        case 3:
-            return (50, 100)
-        case 4:
-            return (100, 200)
-        default:
-            return (200, 220)
-        }
-    }
-
-    var _pm25Threshold: (Double, Double) {
-        switch self._aqi {
-        case 1:
-            return (0, 20)
-        case 2:
-            return (20, 50)
-        case 3:
-            return (25, 50)
-        case 4:
-            return (50, 75)
-        default:
-            return (75, 85)
-        }
-    }
-        
-    var _o3Threshold: (Double, Double) {
-        switch self._aqi {
-        case 1:
-            return (0, 10)
-        case 2:
-            return (10, 25)
-        case 3:
-            return (25, 50)
-        case 4:
-            return (140, 180)
-        default:
-            return (180, 200)
-        }
-    }
-    
-    var _so2Threshold: (Double, Double) {
-        switch self._aqi {
-        case 1:
-            return (0, 60)
-        case 2:
-            return (60, 100)
-        case 3:
-            return (100, 140)
-        case 4:
-            return (140, 180)
-        default:
-            return (180, 200)
-        }
-    }
-}
 
 
 // MARK: - Mock Data
@@ -217,13 +125,13 @@ extension AirQuality {
                     dt: Date(),
                     main: AQI(aqi: 3),
                     pollutants: Pollutants(
-                        co: 201.94053649902344,
+                        co: 4500,
                         no: 0.01877197064459324,
-                        no2: 0.7711350917816162,
+                        no2: 40,
                         o3: 68.66455078125,
-                        so2: 0.6407499313354492,
-                        pm25: 0.5,
-                        pm10: 0.540438711643219,
+                        so2: 90,
+                        pm25: 15,
+                        pm10:35,
                         nh3: 0.12369127571582794
                     )
                 )
