@@ -9,8 +9,7 @@ import SwiftUI
 
 struct PollutantSubCard: View {
     
-    let name: String
-    let nameSub: String
+    let pollutant: PollutantDescription
     let value: Double
     var colorStr : String
     
@@ -34,12 +33,12 @@ struct PollutantSubCard: View {
     var body: some View {
         HStack {
             HStack {
-                Text(name)
+                Text(pollutant.name.0)
                     .font(.system(size: 14))
-                Text(nameSub).font(.system(size: 12))
+                Text(pollutant.name.1).font(.system(size: 12))
                     .offset(x:-7, y:5)
                     .overlay {
-                       Popover(showText: $showText)
+                        Popover(showText: $showText, info: pollutant.description)
                     }
                     .onTapGesture {
                         showText.toggle()
@@ -62,7 +61,7 @@ struct PollutantSubCard: View {
         }
     }
 }
-//
-//#Preview {
-//    PollutantSubCard(name: "PM2.5", color: Color.teal, value: 80)
-//}
+
+#Preview {
+    PollutantSubCard(pollutant: PollutantDescription.pm25, value: 200, colorStr: "Green")
+}
