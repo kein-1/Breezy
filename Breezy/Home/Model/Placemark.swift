@@ -9,10 +9,10 @@ import Foundation
 
 
 struct Placemark {
-    let name: String
-    let locality: String
-    let administrativeArea: String
-    let country: String
+    let name: String?
+    let locality: String?
+    let administrativeArea: String?
+    let country: String?
 }
 
 // MARK: - Mock Data

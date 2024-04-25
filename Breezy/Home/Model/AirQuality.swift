@@ -31,15 +31,15 @@ struct AirQuality: Codable {
     var description: String {
         switch self._aqi.0 {
             case 1:
-                "Good"
+                "Per USA EPA guidelines, air quality is satisfactory, and air pollution poses little or no risk."
             case 2:
-                "Fair"
+                "Per USA EPA guidelines, air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution."
             case 3:
-                "Moderate"
+                "Per USA EPA guidelines, members of sensitive groups may experience health effects. The general public is less likely to be affected."
             case 4:
-                "Poor"
+                "Per USA EPA guidelines, some members of the general public may experience health effects; members of sensitive groups may experience more serious health effects."
             default:
-                "Very Poor"
+                "Per USA EPA guidelines, this is a health alert: the risk of health effects is increased for everyone."
             }
     }
 }
@@ -110,6 +110,10 @@ extension AirQuality {
     
     var _aqi :  (Int,String) {
         (self.list[0].main.aqi, "AQI")
+    }
+    
+    var _date : Date {
+        self.list[0].dt
     }
 }
 

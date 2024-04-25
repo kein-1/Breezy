@@ -48,6 +48,25 @@ class HomeViewModel: ViewModel {
         currAQ?.1 ?? Placemark.mockPlacemark
     }
     
+    var currentHistory: Historical = .week
+    var timeDifference: (TimeInterval, TimeInterval) {
+        let end  = Date()
+        switch currentHistory {
+            case .week:
+                let start = Calendar.current.date(byAdding: .day, value: -7, to: end)!
+                return (start.timeIntervalSince1970, end.timeIntervalSince1970)
+            case .month:
+                let start = Calendar.current.date(byAdding: .month, value: -1, to: end)!
+                return (start.timeIntervalSince1970, end.timeIntervalSince1970)
+            case .sixMonths:
+                let start = Calendar.current.date(byAdding: .month, value: -6, to: end)!
+                return (start.timeIntervalSince1970, end.timeIntervalSince1970)
+            case .year:
+                let start = Calendar.current.date(byAdding: .year, value: -1, to: end)!
+                return (start.timeIntervalSince1970, end.timeIntervalSince1970)
+        }
+    }
+    
     
     var networkManager : NetworkService
     var locationManager: LocationService
@@ -62,9 +81,8 @@ class HomeViewModel: ViewModel {
     /// Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveLocationAndUpdateData() async {
         guard let currentLocation = locationManager.getLocation() else { return }
-        
         do {
-            if locationManager.lastUpdated  {
+            if locationManager.shouldUpdate  {
                 print("updating aq")
                 let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
                 let airQuality = try await networkManager.getPollutionData(lon: lon, lat: lat)

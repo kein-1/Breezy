@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Protocol for Network Services
 protocol NetworkService {
     func getPollutionData(lon: Double, lat: Double) async throws -> AirQuality
-    func getHistoricalData(lon: Double, lat: Double) async throws -> AirQuality
+    func getHistoricalData(lon: Double, lat: Double, start: TimeInterval, end: TimeInterval) async throws -> AirQuality
 }
     
 
@@ -47,9 +47,26 @@ class NetworkManager: NetworkService {
         return airQuality
     }
     
-    func getHistoricalData(lon: Double, lat: Double) async throws -> AirQuality {
-        // TODO: - write method
-        return airQualityMock
+    func getHistoricalData(lon: Double, lat: Double, start: TimeInterval, end: TimeInterval) async throws -> AirQuality {
+        
+        guard let key = ProcessInfo.processInfo.environment["API_KEY"] else {
+            throw APIErrors.invalidAPIKey
+        }
+        
+        guard let url = URL(string: "http://api.openweathermap.org/data/2.5/air_pollution/history?lat=\(lat)&lon=\(lon)&start=\(start)&end=\(end)&appid=\(key)") else {
+            throw NetworkErrors.invalidURL
+        }
+        
+        let (data,response) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw NetworkErrors.invalidRequest
+        }
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        let airQuality = try decoder.decode(AirQuality.self, from: data)
+        return airQuality
     }
 }
 

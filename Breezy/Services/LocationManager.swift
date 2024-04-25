@@ -15,7 +15,7 @@ protocol LocationService {
     var authStatus: CLAuthorizationStatus { get }
     func getLocation() -> CLLocation?
     var threshold : CLLocationDistance { get }
-    var lastUpdated : Bool { get }
+    var shouldUpdate : Bool { get }
     func performGeoReverse() async -> Placemark?
 }
 
@@ -25,7 +25,7 @@ class LocationManager: NSObject, LocationService {
     private (set) var currLocation: CLLocation? = nil
     var authStatus: CLAuthorizationStatus = CLAuthorizationStatus.denied
     var threshold : CLLocationDistance = 300
-    var lastUpdated : Bool = false
+    var shouldUpdate : Bool = false
     static var shared = LocationManager()
     
     private override init() {
@@ -70,11 +70,10 @@ class LocationManager: NSObject, LocationService {
         }
                 
         for placemark in placemarks {
-            let name = placemark.name ?? "Unknown"
-            let locality = placemark.locality ?? "Unknown"
-            let administrativeArea = placemark.administrativeArea ?? "Unknown"
-            let country = placemark.country ?? "Unknown"
-            
+            let name = placemark.name
+            let locality = placemark.locality
+            let administrativeArea = placemark.administrativeArea
+            let country = placemark.country
             let placeMark = Placemark(name: name, locality: locality, administrativeArea: administrativeArea, country: country)
             return placeMark
         }
@@ -101,16 +100,11 @@ extension LocationManager : CLLocationManagerDelegate {
         
         guard let currLocation = self.currLocation else {
             self.currLocation = latestLocation
-            self.lastUpdated = true
+            self.shouldUpdate = true
             return
         }
         
-        print("ran here")
-        if currLocation.distance(from: latestLocation) > self.threshold {
-            self.lastUpdated = true
-        } else {
-            self.lastUpdated = false
-        }
+        self.shouldUpdate = currLocation.distance(from: latestLocation) > self.threshold ? true : false
         self.currLocation = latestLocation
     }
     

@@ -15,16 +15,16 @@ struct PollutantSubCard: View {
     
     var color: Color {
         switch colorStr {
-        case "Green":
-            Color.green
-        case "Teal":
-            Color.teal
-        case "Orange":
-            Color.orange
-        case "Purple":
-            Color.purple
-        default:
-            Color.red
+            case "Green":
+                Color.green
+            case "Teal":
+                Color.teal
+            case "Orange":
+                Color.orange
+            case "Purple":
+                Color.purple
+            default:
+                Color.red
         }
     }
     
