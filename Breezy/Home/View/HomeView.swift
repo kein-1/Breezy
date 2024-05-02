@@ -10,6 +10,8 @@ import CoreLocation
 
 struct HomeView : View {
     
+    
+    
     @State var homeVM = HomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
 //    @State var homeVM = MockHomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
@@ -23,6 +25,7 @@ struct HomeView : View {
                                 await homeVM.retrieveLocationAndUpdateData()
                             }
                         }
+                        
                     }
                 } else {
                     PlaceCard(place: homeVM._currPlaceData, date: homeVM._currAQData._date)
@@ -30,7 +33,7 @@ struct HomeView : View {
                     DescriptionCard(description: homeVM._currAQData.description)
                     ActivitiesView(aq: homeVM._currAQData)
                     PollutantCard(aq: homeVM._currAQData)
-                    
+                    HistoricalCard(homeVM: homeVM)
                 }
             }
         }

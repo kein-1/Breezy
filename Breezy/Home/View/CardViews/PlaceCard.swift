@@ -33,15 +33,3 @@ struct PlaceCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
-
-//#Preview {
-//    PlaceCard(place: Placemark.mockPlacemark, date: AirQuality.mockAQ._date)
-//}
-//
-//static let mockPlacemark: Self =
-//    Placemark(
-//        name: "Golden Gate Bridge",
-//        locality: "San Francisco",
-//        administrativeArea: "California",
-//        country: "United States"
-//    )

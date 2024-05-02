@@ -9,6 +9,7 @@ import Foundation
 import CoreLocation
 
 
+/// Protocol for Location Service
 protocol LocationService {
     var manager : CLLocationManager { get }
     var currLocation: CLLocation? { get }
@@ -35,6 +36,8 @@ class LocationManager: NSObject, LocationService {
     }
     
     
+    /// Checks for auth, then retrieves the location
+    /// - Returns: the user's current location
     func getLocation() -> CLLocation? {
         checkAuthorization()
         return currLocation

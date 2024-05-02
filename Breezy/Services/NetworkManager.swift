@@ -53,7 +53,10 @@ class NetworkManager: NetworkService {
             throw APIErrors.invalidAPIKey
         }
         
-        guard let url = URL(string: "http://api.openweathermap.org/data/2.5/air_pollution/history?lat=\(lat)&lon=\(lon)&start=\(start)&end=\(end)&appid=\(key)") else {
+        let start = Int(start)
+        let end = Int(end)
+        
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/air_pollution/history?lat=\(lat)&lon=\(lon)&start=\(start)&end=\(end)&appid=\(key)") else {
             throw NetworkErrors.invalidURL
         }
         
@@ -62,6 +65,7 @@ class NetworkManager: NetworkService {
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw NetworkErrors.invalidRequest
         }
+        
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970

@@ -9,8 +9,8 @@ import Foundation
 import Observation
 import CoreLocation
 
-// MARK: - ViewModel protocol using associated types
-protocol ViewModel {
+// MARK: - ViewModel protocol. AnyObject to allow @Bindable since it expects a class
+protocol ViewModel : Observable, AnyObject {
     
     associatedtype Network
     associatedtype Location
@@ -22,7 +22,17 @@ protocol ViewModel {
     
     var places : [(AirQuality,Placemark)] { get }
     var currAQ : (AirQuality,Placemark)?  { get }
+    var historicalData : AirQuality? { get }
+    
+    var _currAQData: AirQuality { get }
+    var _currPlaceData: Placemark { get }
+    var _currHistoricalData: [PrimaryData] { get }
+    
+    var currentHistory: Historical { get set }
+    var timeDifference: (TimeInterval, TimeInterval) { get }
+    
     func retrieveLocationAndUpdateData() async -> Void
+    func retrieveHistoricalData() async -> Void
 }
 
 
@@ -39,6 +49,7 @@ class HomeViewModel: ViewModel {
     
     var places = [(AirQuality,Placemark)]()
     private (set) var currAQ : (AirQuality,Placemark)?
+    private (set) var historicalData : AirQuality?
     
     var _currAQData: AirQuality {
         currAQ?.0 ?? AirQuality.mockAQ
@@ -47,6 +58,23 @@ class HomeViewModel: ViewModel {
     var _currPlaceData: Placemark{
         currAQ?.1 ?? Placemark.mockPlacemark
     }
+    
+    var _currHistoricalData: [PrimaryData] {
+        guard let _historicalData = historicalData else { return [PrimaryData]() }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-dd-MM"
+        
+        var set = Set<String>()
+        var primaryData = [PrimaryData]()
+        for data in _historicalData.list {
+            let dateStr = dateFormatter.string(from: data.dt)
+            let (result, _ ) = set.insert(dateStr)
+            if result { primaryData.append(data) }
+        }
+        return primaryData.sorted(by: { $0.dt < $1.dt })
+    }
+    
     
     var currentHistory: Historical = .week
     var timeDifference: (TimeInterval, TimeInterval) {
@@ -88,8 +116,26 @@ class HomeViewModel: ViewModel {
                 let airQuality = try await networkManager.getPollutionData(lon: lon, lat: lat)
                 guard let placemark = await locationManager.performGeoReverse() else { return }
                 self.currAQ = (airQuality, placemark)
+                
+                await retrieveHistoricalData()
             }
         } catch let error as NetworkErrors  {
+            print("error in network call")
+        } catch APIErrors.invalidAPIKey {
+            print("error in api-key")
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    func retrieveHistoricalData() async {
+        guard let currentLocation = locationManager.getLocation() else { return }
+        do {
+            let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
+            let airQuality = try await networkManager.getHistoricalData(lon: lon, lat: lat, start: self.timeDifference.0, end: self.timeDifference.1)
+            self.historicalData = airQuality
+        } catch NetworkErrors.invalidRequest {
             print("error in network call")
         } catch APIErrors.invalidAPIKey {
             print("error in api-key")
