@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Charts
 
 
 /// Generics for a protocol binding
@@ -18,24 +17,20 @@ struct HistoricalCard<_ViewModel:ViewModel> : View {
     var body: some View {
         VStack {
             Section {
-                HStack (spacing: 20){
-                    HistoricalButtonView(homeVM: homeVM, time: .week)
-                    HistoricalButtonView(homeVM: homeVM, time: .month)
-                    HistoricalButtonView(homeVM: homeVM, time: .year)
+                HStack (spacing: 5){
+                    HistoricalButtonView(homeVM: homeVM, time: .week, title: "Week")
+                    HistoricalButtonView(homeVM: homeVM, time: .month, title: "Month")
+                    HistoricalButtonView(homeVM: homeVM, time: .year, title: "Year")
                 }
+                
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .trailing)
             } header: {
                 HeaderLine(title: "Past Air Quality")
             }
-            
-            Chart(homeVM._currHistoricalData, id: \.self) { data in
-                
-                BarMark(
-                    x: .value("Date", data.dt.formatted(date: .numeric, time: .omitted)),
-                    y: .value("Pollutants", data.main.aqi)
-                )
+            Section {
+                ChartCard(homeVM: homeVM)
             }
-            .chartScrollableAxes(.horizontal)
-            .chartXVisibleDomain(length: 7)
         }
         .padding()
         .frame(minHeight: 400, maxHeight: .infinity)

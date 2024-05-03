@@ -10,7 +10,8 @@ import SwiftUI
 struct HistoricalButtonView<_ViewModel:ViewModel> : View {
     
     @Bindable var homeVM: _ViewModel
-    var time: Historical
+    let time: Historical
+    let title: String
     
     var body: some View {
         Button {
@@ -21,8 +22,9 @@ struct HistoricalButtonView<_ViewModel:ViewModel> : View {
                 await homeVM.retrieveHistoricalData()
             }
         } label: {
-            Text("weeks")
+            Text(title)
                 .foregroundStyle(homeVM.currentHistory == time ? .white : .black)
+                .font(.system(size: 14))
                 .padding()
                 .background {
                     Capsule()

@@ -12,8 +12,8 @@ struct HomeView : View {
     
     
     
-    @State var homeVM = HomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-//    @State var homeVM = MockHomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+//    @State var homeVM = HomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    @State var homeVM = MockHomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
     var body: some View {
         ScrollView {
