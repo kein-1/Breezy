@@ -13,7 +13,9 @@ struct HomeView : View {
     
     
 //    @State var homeVM = HomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    //    @State var homeVM = HistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     @State var homeVM = MockHomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
     var body: some View {
         ScrollView {
@@ -33,7 +35,7 @@ struct HomeView : View {
                     DescriptionCard(description: homeVM._currAQData.description)
                     ActivitiesView(aq: homeVM._currAQData)
                     PollutantCard(aq: homeVM._currAQData)
-                    HistoricalCard(homeVM: homeVM)
+                    HistoricalCard(historyVM: historyVM)
                 }
             }
         }

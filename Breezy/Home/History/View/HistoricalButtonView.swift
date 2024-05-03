@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct HistoricalButtonView<_ViewModel:ViewModel> : View {
+struct HistoricalButtonView<_ViewModel:HistoricalDataProtocol> : View {
     
-    @Bindable var homeVM: _ViewModel
+    @Bindable var historyVM : _ViewModel
     let time: Historical
     let title: String
     
@@ -17,18 +17,18 @@ struct HistoricalButtonView<_ViewModel:ViewModel> : View {
         Button {
             Task {
                 withAnimation {
-                    homeVM.currentHistory = time
+                    historyVM.currentHistory = time
                 }
-                await homeVM.retrieveHistoricalData()
+                await historyVM.retrieveHistoricalData()
             }
         } label: {
             Text(title)
-                .foregroundStyle(homeVM.currentHistory == time ? .white : .black)
+                .foregroundStyle(historyVM.currentHistory == time ? .white : .black)
                 .font(.system(size: 14))
                 .padding()
                 .background {
                     Capsule()
-                        .fill(homeVM.currentHistory == time ? .mint : .clear)
+                        .fill(historyVM.currentHistory == time ? .mint : .clear)
                 }
         }
     }

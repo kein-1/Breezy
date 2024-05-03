@@ -10,7 +10,7 @@ import Observation
 import CoreLocation
 
 // MARK: - ViewModel protocol. AnyObject to allow @Bindable since it expects a class
-protocol ViewModel : Observable, AnyObject {
+protocol Locateable : Observable, AnyObject {
     
     associatedtype Network
     associatedtype Location
@@ -32,7 +32,7 @@ protocol ViewModel : Observable, AnyObject {
 
 // MARK: - Home View's View Model
 @Observable
-class HomeViewModel: ViewModel {
+class AQViewModel: Locateable {
    
     // Define type alias for the associated type, allowing more flexibility
     // Say some other class wants to conform to this protocol. It can then change its definition of Network and Location

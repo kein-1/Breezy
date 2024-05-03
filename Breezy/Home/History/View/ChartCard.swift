@@ -9,11 +9,11 @@ import SwiftUI
 import Charts
 
 
-struct ChartCard<_ViewModel: ViewModel> : View {
+struct ChartCard<_ViewModel: HistoryDataViewModel> : View {
     
-    @Bindable var homeVM: _ViewModel
+    @Bindable var historyVM: _ViewModel
     var body: some View {
-        Chart(homeVM._currHistoricalData, id: \.self) { data in
+        Chart(historyVM._currHistoricalData, id: \.self) { data in
             
             BarMark(
                 x: .value("Date", data.dt.formatted(date: .numeric, time: .omitted)),
@@ -25,8 +25,8 @@ struct ChartCard<_ViewModel: ViewModel> : View {
     }
 }
 
-#Preview {
-    @State var homeVM = MockHomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-    
-    return ChartCard(homeVM: homeVM)
-}
+//#Preview {
+//    @State var historyVM = MockHomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+//    
+//    return ChartCard(historyVM: historyVM)
+//}

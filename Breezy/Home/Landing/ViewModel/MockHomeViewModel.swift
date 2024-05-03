@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Home View's View Model
 @Observable
-class MockHomeViewModel: ViewModel {
+class MockHomeViewModel: Locateable {
     
    
     typealias Network = NetworkService

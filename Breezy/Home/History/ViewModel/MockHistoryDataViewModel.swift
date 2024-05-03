@@ -1,34 +1,15 @@
 //
-//  ChartsViewModel.swift
+//  MockHistoryDataViewModel.swift
 //  Breezy
 //
-//  Created by Kein Li on 5/2/24.
+//  Created by Kein Li on 5/3/24.
 //
 
 import Foundation
 
 
-// MARK: - Historical content view model protocol
-protocol HistoricalVMProtocol : Observable, AnyObject {
-    associatedtype Network
-    associatedtype Location
-    
-    var networkManager : Network { get }
-    var locationManager: Location { get }
-    
-    init(networkManager: Network, locationManager: Location)
-    
-    var historicalData : AirQuality? { get }
-    
-    var currentHistory: Historical { get set }
-    var timeDifference: (TimeInterval, TimeInterval) { get }
-    
-    func retrieveHistoricalData() async -> Void
-    
-}
-
 @Observable
-class HistoricalViewModel : HistoricalVMProtocol {
+class MockHistoryDataViewModel : HistoricalDataProtocol {
     
     typealias Network = NetworkService
     typealias Location = LocationService
