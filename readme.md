@@ -1,5 +1,5 @@
 App design, architecture, and design considerations:
-- Protocols oriented programming - allows dependency injection and easily switch between real and mock for testing
+- Protocol oriented programming - allows dependency injection and easily switch between real and mock for testing
 - Extensions in model with mock data for testing
 - Generics - used generics for working through @Bindable 
 
