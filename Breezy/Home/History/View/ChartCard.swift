@@ -9,24 +9,29 @@ import SwiftUI
 import Charts
 
 
-struct ChartCard<_ViewModel: HistoryDataViewModel> : View {
+struct ChartCard<_ViewModel: HistoricalDataProtocol> : View {
     
     @Bindable var historyVM: _ViewModel
     var body: some View {
-        Chart(historyVM._currHistoricalData, id: \.self) { data in
+        Chart {
+            ForEach(historyVM.currHistoricalData, id: \.self) { primaryData in
+                CustomBarMarkView(primaryData: primaryData)
+            }
             
-            BarMark(
-                x: .value("Date", data.dt.formatted(date: .numeric, time: .omitted)),
-                y: .value("Pollutants", data.main.aqi)
-            )
         }
-        .chartScrollableAxes(.horizontal)
-        .chartXVisibleDomain(length: 7)
+        .frame(minHeight: 300, maxHeight: .infinity)
+        .chartScrollableAxes(.horizontal) // horizontal scrolling
+        .chartXVisibleDomain(length: 7) // how many elements to show on x axis
+        .chartYScale(domain: 1...5) // customize the range in the y axis
+        
+        
     }
 }
 
-//#Preview {
-//    @State var historyVM = MockHomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-//    
-//    return ChartCard(historyVM: historyVM)
-//}
+#Preview {
+    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    
+    return ChartCard(historyVM: historyVM)
+}
+
+

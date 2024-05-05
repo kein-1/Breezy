@@ -19,7 +19,7 @@ protocol HistoricalDataProtocol : Observable, AnyObject {
     init(networkManager: Network, locationManager: Location)
     
     var historicalData : AirQuality? { get }
-    
+    var currHistoricalData: [PrimaryData] { get }
     var currentHistory: Historical { get set }
     var timeDifference: (TimeInterval, TimeInterval) { get }
     
@@ -42,7 +42,7 @@ class HistoryDataViewModel : HistoricalDataProtocol {
         self.locationManager = locationManager
     }
     
-    var _currHistoricalData: [PrimaryData] {
+    var currHistoricalData: [PrimaryData] {
         guard let _historicalData = historicalData else { return [PrimaryData]() }
         
         let dateFormatter = DateFormatter()

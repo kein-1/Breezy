@@ -45,6 +45,7 @@ struct AirQuality: Codable {
     }
 }
 
+// MARK: - Primary data
 struct PrimaryData: Codable {
     
     let dt: Date
@@ -57,7 +58,7 @@ struct PrimaryData: Codable {
     }
    
 }
-
+// MARK: - Primary data extension
 extension PrimaryData:  Hashable {
     
     public func hash(into hasher: inout Hasher) {
@@ -69,15 +70,18 @@ extension PrimaryData:  Hashable {
     }
 }
 
+// MARK: - Coord
 struct Coord: Codable {
     let lon: Double
     let lat: Double
 }
 
+// MARK: - Air quality value
 struct AQI: Codable {
     let aqi: Int
 }
 
+// MARK: - Pollutants
 struct Pollutants: Codable, Identifiable {
     let id = UUID()
     let co: Double

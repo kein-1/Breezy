@@ -33,15 +33,18 @@ struct HistoricalCard<_ViewModel: HistoricalDataProtocol> : View {
             }
         }
         .padding()
-        .frame(minHeight: 400, maxHeight: .infinity)
+        .task {
+            await historyVM.retrieveHistoricalData()
+        }
+        
     }
 }
 
-#Preview {
-    @State var homeVM = MockHomeViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-    
-    return HistoricalCard(homeVM: homeVM)
-}
+//#Preview {
+//    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+//    
+//    return HistoricalCard(historyVM: historyVM)
+//}
 
 
 

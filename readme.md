@@ -11,6 +11,6 @@ Design issues I faced:
 - Also https://tanaschita.com/20230807-migrating-to-observation/ was great to use to reference @Observable and SwiftUI data flow. Using @Observable, we go from @StateObject->@State and @ObservedObject->@Bindable
 
 Notes :
-- Date formatter - DateFormatter / .formatted() is incredibly useful for formatting dates
+- Date formatter - .formatted() is incredibly useful for formatting dates. iOS 15+ introduced a new Formatter API via Date.FormatStyle (.dateTime) which makes working with Dates much easier than creating a new DateFormatter.
 - Swift charts for modeling historical air quality
 - Singleton + Dependency injection - https://stackoverflow.com/questions/55483541/how-to-use-the-singleton-pattern-in-conjunction-with-dependency-injection

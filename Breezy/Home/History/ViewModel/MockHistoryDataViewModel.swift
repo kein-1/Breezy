@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// MARK: - Mock history view model
 @Observable
 class MockHistoryDataViewModel : HistoricalDataProtocol {
     
@@ -21,9 +21,10 @@ class MockHistoryDataViewModel : HistoricalDataProtocol {
     required init(networkManager: Network, locationManager: Location ) {
         self.networkManager = networkManager
         self.locationManager = locationManager
+        self.historicalData = AirQuality.mockAQ
     }
     
-    var _currHistoricalData: [PrimaryData] {
+    var currHistoricalData: [PrimaryData] {
         guard let _historicalData = historicalData else { return [PrimaryData]() }
         
         let dateFormatter = DateFormatter()
@@ -31,14 +32,14 @@ class MockHistoryDataViewModel : HistoricalDataProtocol {
         
         var set = Set<String>()
         var primaryData = [PrimaryData]()
-        for data in _historicalData.list {
-            let dateStr = dateFormatter.string(from: data.dt)
+        for data in AirQuality.mockHistoricalAQ.list {
+            let dateStr = data.dt.formatted(.dateTime.day().month().year())
+            print(dateStr)
             let (result, _ ) = set.insert(dateStr)
             if result { primaryData.append(data) }
         }
         return primaryData.sorted(by: { $0.dt < $1.dt })
     }
-    
     var currentHistory: Historical = .week
     
     var timeDifference: (TimeInterval, TimeInterval) {
