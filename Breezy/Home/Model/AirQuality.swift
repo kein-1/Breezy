@@ -182,8 +182,50 @@ extension AirQuality {
             coord: Coord(lon: -122.0089, lat: 37.3347),
             list: [
                 PrimaryData(
-                        dt: Date(timeIntervalSince1970: 1714071860),
-                        main: AQI(aqi: 3),
+                        dt: Date(timeIntervalSince1970: 1713752907),
+                        main: AQI(aqi: 5),
+                        pollutants: Pollutants(
+                            co: 223.64,
+                            no: 0.62,
+                            no2: 2.63,
+                            o3: 101.57,
+                            so2: 1.01,
+                            pm25: 0.92,
+                            pm10: 2.05,
+                            nh3: 0.22
+                        )
+                    ),
+                PrimaryData(
+                        dt: Date(timeIntervalSince1970: 1713839307),
+                        main: AQI(aqi: 2),
+                        pollutants: Pollutants(
+                            co: 223.64,
+                            no: 0.62,
+                            no2: 2.63,
+                            o3: 101.57,
+                            so2: 1.01,
+                            pm25: 0.92,
+                            pm10: 2.05,
+                            nh3: 0.22
+                        )
+                    ),
+                PrimaryData(
+                        dt: Date(timeIntervalSince1970: 1713925707),
+                        main: AQI(aqi: 1),
+                        pollutants: Pollutants(
+                            co: 223.64,
+                            no: 0.62,
+                            no2: 2.63,
+                            o3: 101.57,
+                            so2: 1.01,
+                            pm25: 0.92,
+                            pm10: 2.05,
+                            nh3: 0.22
+                        )
+                    ),
+                PrimaryData(
+                        dt: Date(timeIntervalSince1970: 1714012107),
+                        main: AQI(aqi: 4),
                         pollutants: Pollutants(
                             co: 223.64,
                             no: 0.62,

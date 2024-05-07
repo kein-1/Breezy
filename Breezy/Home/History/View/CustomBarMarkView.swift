@@ -26,7 +26,7 @@ struct CustomBarMarkView: ChartContent {
     }
     
     var body : some ChartContent {
-        return BarMark(
+        BarMark(
             x: .value("Date", primaryData.dt.formatted(
                 .dateTime // specify only to show day and month
                     .day(.twoDigits)

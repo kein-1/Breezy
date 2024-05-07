@@ -14,3 +14,5 @@ Notes :
 - Date formatter - .formatted() is incredibly useful for formatting dates. iOS 15+ introduced a new Formatter API via Date.FormatStyle (.dateTime) which makes working with Dates much easier than creating a new DateFormatter.
 - Swift charts for modeling historical air quality
 - Singleton + Dependency injection - https://stackoverflow.com/questions/55483541/how-to-use-the-singleton-pattern-in-conjunction-with-dependency-injection
+- Generics in protocol (associatedtype/type alias), and using either generics or existential types (protocol as type. required to use "any" keyword in future Swift), and differenec in performance
+

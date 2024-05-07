@@ -40,11 +40,11 @@ struct HistoricalCard<_ViewModel: HistoricalDataProtocol> : View {
     }
 }
 
-//#Preview {
-//    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-//    
-//    return HistoricalCard(historyVM: historyVM)
-//}
+#Preview {
+    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    
+    return HistoricalCard(historyVM: historyVM)
+}
 
 
 

@@ -40,6 +40,16 @@ class AQViewModel: Locateable {
     typealias Network = NetworkService
     typealias Location = LocationService
     
+    // Use "any" to define this is an Existential Type (protocol as the type)
+    var networkManager : any NetworkService
+    var locationManager: any LocationService
+    
+    required init(networkManager: Network, locationManager: Location ) {
+        self.networkManager = networkManager
+        self.locationManager = locationManager
+    }
+    
+    
     var places = [(AirQuality,Placemark)]()
     private (set) var currAQ : (AirQuality,Placemark)?
     private (set) var historicalData : AirQuality?
@@ -48,18 +58,12 @@ class AQViewModel: Locateable {
         currAQ?.0 ?? AirQuality.mockAQ
     }
     
-    var _currPlaceData: Placemark{
+    var _currPlaceData: Placemark {
         currAQ?.1 ?? Placemark.mockPlacemark
     }
     
-    var networkManager : NetworkService
-    var locationManager: LocationService
-    
-    required init(networkManager: Network, locationManager: Location ) {
-        self.networkManager = networkManager
-        self.locationManager = locationManager
-    }
-    
+  
+   
     
     
     /// Retrieves the current location, updates it with air quality data, and performs geoReverse on that location

@@ -21,7 +21,7 @@ protocol HistoricalDataProtocol : Observable, AnyObject {
     var historicalData : AirQuality? { get }
     var currHistoricalData: [PrimaryData] { get }
     var currentHistory: Historical { get set }
-    var timeDifference: (TimeInterval, TimeInterval) { get }
+    var timeDifference: (start: TimeInterval, end: TimeInterval) { get }
     
     func retrieveHistoricalData() async -> Void
     
@@ -33,9 +33,9 @@ class HistoryDataViewModel : HistoricalDataProtocol {
     typealias Network = NetworkService
     typealias Location = LocationService
     
-    private (set) var historicalData : AirQuality?
-    var networkManager : NetworkService
-    var locationManager: LocationService
+    private (set) var historicalData : AirQuality? // weekly,monthly,yearly
+    var networkManager : any NetworkService
+    var locationManager: any LocationService
     
     required init(networkManager: Network, locationManager: Location ) {
         self.networkManager = networkManager
@@ -45,37 +45,31 @@ class HistoryDataViewModel : HistoricalDataProtocol {
     var currHistoricalData: [PrimaryData] {
         guard let _historicalData = historicalData else { return [PrimaryData]() }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-dd-MM"
-        
         var set = Set<String>()
         var primaryData = [PrimaryData]()
         for data in _historicalData.list {
-            let dateStr = dateFormatter.string(from: data.dt)
-            let (result, _ ) = set.insert(dateStr)
-            if result { primaryData.append(data) }
+            let dateStr = data.dt.formatted(.dateTime.day().month().year())
+            if set.insert(dateStr).inserted { primaryData.append(data) }
         }
         return primaryData.sorted(by: { $0.dt < $1.dt })
     }
     
     var currentHistory: Historical = .week
     
-    var timeDifference: (TimeInterval, TimeInterval) {
+    var timeDifference: (start: TimeInterval, end: TimeInterval) {
         let end  = Date()
+        let start : Date
         switch currentHistory {
             case .week:
-                let start = Calendar.current.date(byAdding: .day, value: -7, to: end)!
-                return (start.timeIntervalSince1970, end.timeIntervalSince1970)
+                start = Calendar.current.date(byAdding: .day, value: -7, to: end)!
             case .month:
-                let start = Calendar.current.date(byAdding: .month, value: -1, to: end)!
-                return (start.timeIntervalSince1970, end.timeIntervalSince1970)
+                start = Calendar.current.date(byAdding: .month, value: -1, to: end)!
             case .sixMonths:
-                let start = Calendar.current.date(byAdding: .month, value: -6, to: end)!
-                return (start.timeIntervalSince1970, end.timeIntervalSince1970)
+                start = Calendar.current.date(byAdding: .month, value: -6, to: end)!
             case .year:
-                let start = Calendar.current.date(byAdding: .year, value: -1, to: end)!
-                return (start.timeIntervalSince1970, end.timeIntervalSince1970)
+                start = Calendar.current.date(byAdding: .year, value: -1, to: end)!
         }
+        return (start.timeIntervalSince1970, end.timeIntervalSince1970)
     }
     
     
