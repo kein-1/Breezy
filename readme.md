@@ -1,7 +1,12 @@
 App design, architecture, and design considerations:
+- MVVM architecture 
+- CoreLocation to configure user location permissions and user location coordinates along with georeversing
+- MapKit to allow viewing different air qualities across the world 
 - Protocol oriented programming - allows dependency injection and easily switch between real and mock for testing
 - Extensions in model with mock data for testing
-- Generics - used generics for working through @Bindable 
+- Generics - used generics for working through @Bindable and in protocols
+- Charts for viewing historical data by day, week, and months
+
 
 Design issues I faced:
 - Ran into a few errors with trying to use @Environment in a parent view, then passing that to the child view which owns the view model and then injecting that into the view model. This is not allowed since the environment object is available when the body of the view is called
