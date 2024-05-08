@@ -11,18 +11,17 @@ import SwiftUI
 /// Generics for a protocol binding
 /// Cannot apply PropertyWrappers to protocols and extensions
 ///
-struct HistoricalCard<_ViewModel: HistoricalDataProtocol> : View {
+struct HistoricalCard<T: HistoricalDataProtocol> : View {
     
-    @Bindable var historyVM : _ViewModel
+    @Bindable var historyVM : T
     var body: some View {
         VStack {
             Section {
                 HStack (spacing: 5){
-                    HistoricalButtonView(historyVM: historyVM, time: .week, title: "Week")
-                    HistoricalButtonView(historyVM: historyVM, time: .month, title: "Month")
-                    HistoricalButtonView(historyVM: historyVM, time: .year, title: "Year")
+                    ForEach(Historical.allCases, id: \.rawValue) { time in
+                        HistoricalButtonView(historyVM: historyVM, time: time, title: time.rawValue)
+                    }
                 }
-                
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .trailing)
             } header: {

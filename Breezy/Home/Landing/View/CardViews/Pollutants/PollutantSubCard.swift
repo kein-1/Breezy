@@ -46,7 +46,7 @@ struct PollutantSubCard: View {
             }
             .frame(minWidth: 50, maxWidth: .infinity)
             
-            ProgressView(value: value)
+            ProgressView(value: value, total: value + 1)
                 .tint(self.color)
                 .progressViewStyle(.myCustomStyle)
                 .frame(minWidth: 0, maxWidth: .infinity)

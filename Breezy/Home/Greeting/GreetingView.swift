@@ -7,12 +7,29 @@
 
 import SwiftUI
 
-struct GreetingView: View {
+struct GreetingView<_ViewModel: Locateable>: View {
+    @Bindable var homeVM : _ViewModel
     var body: some View {
-        Image("sun")
+        VStack {
+            Text("Breezy")
+            Image("Weather")
+                .interpolation(.none)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 200)
+            Text("Where are you located? To get an accurate reading of your air quality, we recommend entering your exact location")
+            
+            Button("Get current location") {
+                Task {
+                    await homeVM.retrieveLocationAndUpdateData()
+                }
+            }
+        }
+        .padding()
     }
 }
 
 #Preview {
-    GreetingView()
+    @State var homeVM = MockAQViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    return GreetingView(homeVM: homeVM)
 }

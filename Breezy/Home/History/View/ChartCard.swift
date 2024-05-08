@@ -17,7 +17,6 @@ struct ChartCard<_ViewModel: HistoricalDataProtocol> : View {
             ForEach(historyVM.currHistoricalData, id: \.self) { primaryData in
                 CustomBarMarkView(primaryData: primaryData)
             }
-            
         }
         .frame(minHeight: 300, maxHeight: .infinity)
         .chartScrollableAxes(.horizontal) // horizontal scrolling

@@ -89,13 +89,11 @@ class LocationManager: NSObject, LocationService {
 
 extension LocationManager : CLLocationManagerDelegate {
     
-    
     /// Triggers whenever CLLocationManager detects a change
     /// - Parameters:
     ///   - manager: the location manager that generated the updated event
     ///   - locations: array of updated locations. most recent is at the end
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("running update location delegate")
         guard let latestLocation = locations.last else {
             print("lastlast")
             return
@@ -115,6 +113,9 @@ extension LocationManager : CLLocationManagerDelegate {
         print(error)
     }
     
+    
+    /// Runs when the location manager is first created and when
+    /// - Parameter manager: the location manager
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         print("running auth delegate")
         checkAuthorization()

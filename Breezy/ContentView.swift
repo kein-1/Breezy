@@ -9,28 +9,33 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var tagVal = 0
-    
-    
-    
+    @State var selectedTab : Tab = .house
     
     var body: some View {
-        TabView {
+        
+        TabView(selection: $selectedTab) {
             HomeView()
-                .tag(0)
-                .tabItem {
-                    Label("Home", systemImage: "tray.and.arrow.down.fill")
-                }
+                .tag(Tab.house)
             
-            Text("some other")
-                .tag(1)
-                .tabItem {
-                    Label("Received", systemImage: "tray.and.arrow.down.fill")
-                }
+            MapView()
+                .tag(Tab.map)
+            
+            RankingView()
+                .tag(Tab.chart)
         }
+        .border(.blue)
+        .overlay {
+            CustomTabBar(selectedTab: $selectedTab)
+        }
+        
     }
 }
 
 #Preview {
     ContentView()
 }
+
+
+
+
+    

@@ -44,7 +44,7 @@ class AQViewModel: Locateable {
     var networkManager : any NetworkService
     var locationManager: any LocationService
     
-    required init(networkManager: Network, locationManager: Location ) {
+    required init(networkManager: any Network, locationManager: any Location ) {
         self.networkManager = networkManager
         self.locationManager = locationManager
     }
@@ -61,10 +61,6 @@ class AQViewModel: Locateable {
     var _currPlaceData: Placemark {
         currAQ?.1 ?? Placemark.mockPlacemark
     }
-    
-  
-   
-    
     
     /// Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveLocationAndUpdateData() async {

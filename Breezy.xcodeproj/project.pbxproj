@@ -17,7 +17,7 @@
 		8C0C6B7B2BD23209001738DA /* PollutantDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B7A2BD23209001738DA /* PollutantDescription.swift */; };
 		8C0C6B7D2BD99076001738DA /* GaugeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B7C2BD99076001738DA /* GaugeCard.swift */; };
 		8C0C6B7F2BD99D99001738DA /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B7E2BD99D99001738DA /* ActivitiesView.swift */; };
-		8C0C6B812BD99F81001738DA /* MockHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B802BD99F81001738DA /* MockHomeViewModel.swift */; };
+		8C0C6B812BD99F81001738DA /* MockAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B802BD99F81001738DA /* MockAQViewModel.swift */; };
 		8C0C6B842BD9B339001738DA /* PlaceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C6B832BD9B339001738DA /* PlaceCard.swift */; };
 		8C3073F62BB89F350031D69E /* resources.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8C3073F52BB89F350031D69E /* resources.txt */; };
 		8C5CBFEF2BB38454004080B9 /* BreezyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5CBFEE2BB38454004080B9 /* BreezyApp.swift */; };
@@ -36,6 +36,10 @@
 		8C6BB5E82BE49CA5000EF77A /* MockHistoryDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BB5E72BE49CA5000EF77A /* MockHistoryDataViewModel.swift */; };
 		8C6BB5EB2BE6974C000EF77A /* GreetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BB5EA2BE6974C000EF77A /* GreetingView.swift */; };
 		8C6BB5ED2BE7F5DD000EF77A /* CustomBarMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BB5EC2BE7F5DD000EF77A /* CustomBarMarkView.swift */; };
+		8C6BB5F02BEADBC9000EF77A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BB5EF2BEADBC8000EF77A /* MapView.swift */; };
+		8C6BB5F32BEADE18000EF77A /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BB5F22BEADE18000EF77A /* Tab.swift */; };
+		8C6BB5F62BEAEB59000EF77A /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BB5F52BEAEB59000EF77A /* RankingView.swift */; };
+		8C6BB5F82BEAEC41000EF77A /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BB5F72BEAEC41000EF77A /* CustomTabBar.swift */; };
 		8C7B97792BB38650005A7712 /* AirQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B97782BB38650005A7712 /* AirQuality.swift */; };
 		8C7B977C2BB3B14D005A7712 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B977B2BB3B14C005A7712 /* NetworkManager.swift */; };
 		8C7B97832BB61FD0005A7712 /* AQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B97822BB61FD0005A7712 /* AQViewModel.swift */; };
@@ -71,7 +75,7 @@
 		8C0C6B7A2BD23209001738DA /* PollutantDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutantDescription.swift; sourceTree = "<group>"; };
 		8C0C6B7C2BD99076001738DA /* GaugeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeCard.swift; sourceTree = "<group>"; };
 		8C0C6B7E2BD99D99001738DA /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
-		8C0C6B802BD99F81001738DA /* MockHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeViewModel.swift; sourceTree = "<group>"; };
+		8C0C6B802BD99F81001738DA /* MockAQViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAQViewModel.swift; sourceTree = "<group>"; };
 		8C0C6B832BD9B339001738DA /* PlaceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCard.swift; sourceTree = "<group>"; };
 		8C3073F52BB89F350031D69E /* resources.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = resources.txt; sourceTree = "<group>"; };
 		8C5CBFEB2BB38454004080B9 /* Breezy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breezy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +97,10 @@
 		8C6BB5E72BE49CA5000EF77A /* MockHistoryDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHistoryDataViewModel.swift; sourceTree = "<group>"; };
 		8C6BB5EA2BE6974C000EF77A /* GreetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingView.swift; sourceTree = "<group>"; };
 		8C6BB5EC2BE7F5DD000EF77A /* CustomBarMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarMarkView.swift; sourceTree = "<group>"; };
+		8C6BB5EF2BEADBC8000EF77A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		8C6BB5F22BEADE18000EF77A /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		8C6BB5F52BEAEB59000EF77A /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
+		8C6BB5F72BEAEC41000EF77A /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		8C7B97782BB38650005A7712 /* AirQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirQuality.swift; sourceTree = "<group>"; };
 		8C7B977B2BB3B14C005A7712 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		8C7B97822BB61FD0005A7712 /* AQViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQViewModel.swift; sourceTree = "<group>"; };
@@ -136,6 +144,7 @@
 		8C0C6B752BD22B1A001738DA /* ComponentViews */ = {
 			isa = PBXGroup;
 			children = (
+				8C6BB5F12BEADE03000EF77A /* TabBar */,
 				8C0C6B762BD22B32001738DA /* HeaderLine.swift */,
 			);
 			path = ComponentViews;
@@ -174,6 +183,8 @@
 		8C5CBFED2BB38454004080B9 /* Breezy */ = {
 			isa = PBXGroup;
 			children = (
+				8C6BB5F42BEAEB4A000EF77A /* Ranking */,
+				8C6BB5EE2BEADBBC000EF77A /* Map */,
 				8C0C6B752BD22B1A001738DA /* ComponentViews */,
 				8C0C6B722BD1D4DE001738DA /* CustomStyling */,
 				8C7B977E2BB3CFEE005A7712 /* Home */,
@@ -244,6 +255,7 @@
 		8C6BB5E22BE49BE8000EF77A /* History */ = {
 			isa = PBXGroup;
 			children = (
+				8CF261AD2BEB1E95002214FF /* Model */,
 				8C6BB5E62BE49C19000EF77A /* ViewModel */,
 				8C6BB5E52BE49C13000EF77A /* View */,
 			);
@@ -262,7 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				8C7B97822BB61FD0005A7712 /* AQViewModel.swift */,
-				8C0C6B802BD99F81001738DA /* MockHomeViewModel.swift */,
+				8C0C6B802BD99F81001738DA /* MockAQViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -295,6 +307,31 @@
 			path = Greeting;
 			sourceTree = "<group>";
 		};
+		8C6BB5EE2BEADBBC000EF77A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				8C6BB5EF2BEADBC8000EF77A /* MapView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		8C6BB5F12BEADE03000EF77A /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				8C6BB5F22BEADE18000EF77A /* Tab.swift */,
+				8C6BB5F72BEAEC41000EF77A /* CustomTabBar.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		8C6BB5F42BEAEB4A000EF77A /* Ranking */ = {
+			isa = PBXGroup;
+			children = (
+				8C6BB5F52BEAEB59000EF77A /* RankingView.swift */,
+			);
+			path = Ranking;
+			sourceTree = "<group>";
+		};
 		8C7B97772BB3861D005A7712 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,7 +339,6 @@
 				8C0C6B682BCC8524001738DA /* Placemark.swift */,
 				8C0C6B6A2BCD9D5A001738DA /* PollutantTheme.swift */,
 				8C0C6B7A2BD23209001738DA /* PollutantDescription.swift */,
-				8C6BB5D52BDB14A0000EF77A /* Historical.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -326,6 +362,14 @@
 				8C7B97772BB3861D005A7712 /* Model */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		8CF261AD2BEB1E95002214FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8C6BB5D52BDB14A0000EF77A /* Historical.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -459,6 +503,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6BB5F32BEADE18000EF77A /* Tab.swift in Sources */,
 				8C7B977C2BB3B14D005A7712 /* NetworkManager.swift in Sources */,
 				8C0C6B7F2BD99D99001738DA /* ActivitiesView.swift in Sources */,
 				8C0C6B6B2BCD9D5A001738DA /* PollutantTheme.swift in Sources */,
@@ -474,10 +519,13 @@
 				8C6BB5EB2BE6974C000EF77A /* GreetingView.swift in Sources */,
 				8C6BB5E82BE49CA5000EF77A /* MockHistoryDataViewModel.swift in Sources */,
 				8C0C6B7B2BD23209001738DA /* PollutantDescription.swift in Sources */,
+				8C6BB5F62BEAEB59000EF77A /* RankingView.swift in Sources */,
+				8C6BB5F02BEADBC9000EF77A /* MapView.swift in Sources */,
 				8C0C6B712BCDD906001738DA /* PollutantSubCard.swift in Sources */,
 				8C6BB5D42BDAFB9A000EF77A /* HistoricalCard.swift in Sources */,
+				8C6BB5F82BEAEC41000EF77A /* CustomTabBar.swift in Sources */,
 				8C7B97852BB62188005A7712 /* HomeView.swift in Sources */,
-				8C0C6B812BD99F81001738DA /* MockHomeViewModel.swift in Sources */,
+				8C0C6B812BD99F81001738DA /* MockAQViewModel.swift in Sources */,
 				8C7B97832BB61FD0005A7712 /* AQViewModel.swift in Sources */,
 				8C6BB5D82BE45496000EF77A /* HistoricalButtonView.swift in Sources */,
 				8C6BB5D62BDB14A0000EF77A /* Historical.swift in Sources */,

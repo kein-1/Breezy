@@ -24,7 +24,6 @@ protocol HistoricalDataProtocol : Observable, AnyObject {
     var timeDifference: (start: TimeInterval, end: TimeInterval) { get }
     
     func retrieveHistoricalData() async -> Void
-    
 }
 
 @Observable
@@ -64,8 +63,6 @@ class HistoryDataViewModel : HistoricalDataProtocol {
                 start = Calendar.current.date(byAdding: .day, value: -7, to: end)!
             case .month:
                 start = Calendar.current.date(byAdding: .month, value: -1, to: end)!
-            case .sixMonths:
-                start = Calendar.current.date(byAdding: .month, value: -6, to: end)!
             case .year:
                 start = Calendar.current.date(byAdding: .year, value: -1, to: end)!
         }
@@ -87,5 +84,7 @@ class HistoryDataViewModel : HistoricalDataProtocol {
             print(error)
         }
     }
+    
+    
     
 }

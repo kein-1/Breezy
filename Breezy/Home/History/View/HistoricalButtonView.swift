@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct HistoricalButtonView<_ViewModel:HistoricalDataProtocol> : View {
+struct HistoricalButtonView<T: HistoricalDataProtocol> : View {
     
-    @Bindable var historyVM : _ViewModel
+    @Bindable var historyVM : T
     let time: Historical
     let title: String
     
