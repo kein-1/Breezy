@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import CoreLocationUI
+
 
 struct GreetingView<_ViewModel: Locateable>: View {
     @Bindable var homeVM : _ViewModel
@@ -19,7 +21,7 @@ struct GreetingView<_ViewModel: Locateable>: View {
                 .frame(height: 200)
             Text("Where are you located? To get an accurate reading of your air quality, we recommend entering your exact location")
             
-            Button("Get current location") {
+            Button("press me"){
                 Task {
                     await homeVM.retrieveLocationAndUpdateData()
                 }

@@ -9,6 +9,9 @@ import Foundation
 
 // MARK: - Protocol for Network Services
 protocol NetworkService {
+    
+    var decoder: JSONDecoder { get }
+    
     func getPollutionData(lon: Double, lat: Double) async throws -> AirQuality
     func getHistoricalData(lon: Double, lat: Double, start: TimeInterval, end: TimeInterval) async throws -> AirQuality
 }
@@ -26,6 +29,12 @@ enum APIErrors: Error {
 /// Main network manager used to make API calls
 class NetworkManager: NetworkService {
     
+    lazy var decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+        return decoder
+    }()
+    
     func getPollutionData(lon: Double, lat: Double) async throws -> AirQuality {
         
         guard let key = ProcessInfo.processInfo.environment["API_KEY"] else {
@@ -33,6 +42,7 @@ class NetworkManager: NetworkService {
         }
         
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/air_pollution?lat=\(lat)&lon=\(lon)&appid=\(key)") else {
+            
             throw NetworkErrors.invalidURL
         }
         
@@ -41,8 +51,6 @@ class NetworkManager: NetworkService {
             throw NetworkErrors.invalidRequest
         }
         
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
         let airQuality = try decoder.decode(AirQuality.self, from: data)
         return airQuality
     }

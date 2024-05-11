@@ -20,4 +20,6 @@ Notes :
 - Swift charts for modeling historical air quality
 - Singleton + Dependency injection - https://stackoverflow.com/questions/55483541/how-to-use-the-singleton-pattern-in-conjunction-with-dependency-injection
 - Generics in protocol (associatedtype/type alias), and using either generics or existential types (protocol as type. required to use "any" keyword in future Swift), and difference in performance
-
+- Read about "some", "any", generics, and static/dynamic dispatch
+- MapReader allows MapKit to read user taps and convert it to coordinates in iOS 17
+- CoreLocationUI has an interesting new LocationButton feature

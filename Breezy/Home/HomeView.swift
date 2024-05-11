@@ -14,7 +14,7 @@ struct HomeView : View {
 //    
     @State var homeVM = AQViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
         @State var historyVM = HistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-//    @State var homeVM = MockHomeViewModel(networkManager: NetworkManager(), locationManager:  LocationManager.shared)
+//    @State var homeVM = MockAQViewModel(networkManager: NetworkManager(), locationManager:  LocationManager.shared)
 //    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
     var body: some View {

@@ -12,10 +12,10 @@ struct CustomTabBar: View {
     @Binding var selectedTab : Tab
     
     var body: some View {
-        HStack {
+        HStack(spacing: 20) {
             ForEach(Tab.allCases, id: \.self) { tab in
-                Spacer()
                 Image(systemName: tab.rawValue)
+                    .font(.system(size: 16))
                     .scaleEffect(selectedTab == tab ? 1.25 : 1)
                     .onTapGesture {
                         withAnimation {
@@ -25,19 +25,15 @@ struct CustomTabBar: View {
                     .padding()
                     .background {
                         Circle()
-                            .foregroundStyle(selectedTab == tab ? .blue : .clear)
+                            .foregroundStyle(selectedTab == tab ? .teal.opacity(0.6) : .clear)
                     }
-                Spacer()
             }
         }
-        
-        .frame(maxWidth: .infinity)
-        .padding()
         .background {
             Capsule()
-                .fill(.thinMaterial)
+                .fill(.ultraThickMaterial)
         }
-        .padding()
+//        .padding()
     }
 }
 //

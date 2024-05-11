@@ -28,7 +28,7 @@ struct HistoricalButtonView<T: HistoricalDataProtocol> : View {
                 .padding()
                 .background {
                     Capsule()
-                        .fill(historyVM.currentHistory == time ? .mint : .clear)
+                        .fill(historyVM.currentHistory == time ? .teal.opacity(0.6) : .clear)
                 }
         }
     }

@@ -10,13 +10,11 @@ import Foundation
 
 // MARK: - Historical content view model protocol
 protocol HistoricalDataProtocol : Observable, AnyObject {
-    associatedtype Network
-    associatedtype Location
     
-    var networkManager : Network { get }
-    var locationManager: Location { get }
+    var networkManager : any NetworkService { get }
+    var locationManager: any LocationService { get }
     
-    init(networkManager: Network, locationManager: Location)
+    init(networkManager: any NetworkService, locationManager: any LocationService )
     
     var historicalData : AirQuality? { get }
     var currHistoricalData: [PrimaryData] { get }
@@ -29,14 +27,11 @@ protocol HistoricalDataProtocol : Observable, AnyObject {
 @Observable
 class HistoryDataViewModel : HistoricalDataProtocol {
     
-    typealias Network = NetworkService
-    typealias Location = LocationService
-    
     private (set) var historicalData : AirQuality? // weekly,monthly,yearly
     var networkManager : any NetworkService
     var locationManager: any LocationService
     
-    required init(networkManager: Network, locationManager: Location ) {
+    required init(networkManager: any NetworkService, locationManager: any LocationService ) {
         self.networkManager = networkManager
         self.locationManager = locationManager
     }
@@ -71,7 +66,7 @@ class HistoryDataViewModel : HistoricalDataProtocol {
     
     
     func retrieveHistoricalData() async {
-        guard let currentLocation = locationManager.getLocation() else { return }
+        guard let currentLocation = locationManager.manager.location else { return }
         do {
             let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
             let airQuality = try await networkManager.getHistoricalData(lon: lon, lat: lat, start: self.timeDifference.0, end: self.timeDifference.1)

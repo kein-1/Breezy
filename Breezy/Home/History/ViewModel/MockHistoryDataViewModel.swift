@@ -7,26 +7,22 @@
 
 import Foundation
 
-// MARK: - Mock history view model
+// MARK: - Mock history view model 
 @Observable
 class MockHistoryDataViewModel : HistoricalDataProtocol {
-    
-    typealias Network = NetworkService
-    typealias Location = LocationService
     
     
     var networkManager : any NetworkService
     var locationManager: any LocationService
     
-    required init(networkManager: Network, locationManager: Location ) {
+    required init(networkManager: any NetworkService, locationManager: any LocationService ) {
         self.networkManager = networkManager
         self.locationManager = locationManager
-        self.historicalData = AirQuality.mockAQ
     }
     
     private (set) var historicalData : AirQuality?
     var currHistoricalData: [PrimaryData] {
-        guard let _historicalData = historicalData else { return [PrimaryData]() }
+        guard let _ = historicalData else { return [PrimaryData]() }
         
         var set = Set<String>()
         var primaryData = [PrimaryData]()
@@ -38,7 +34,7 @@ class MockHistoryDataViewModel : HistoricalDataProtocol {
     }
     
     var currentHistory: Historical = .week
-
+    
     var timeDifference: (start: TimeInterval, end: TimeInterval) {
         let end  = Date()
         let start : Date
@@ -55,18 +51,13 @@ class MockHistoryDataViewModel : HistoricalDataProtocol {
     
     
     func retrieveHistoricalData() async {
-        guard let currentLocation = locationManager.getLocation() else { return }
-//        do {
-//            let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
-//            let airQuality = try await networkManager.getHistoricalData(lon: lon, lat: lat, start: self.timeDifference.0, end: self.timeDifference.1)
-//            self.historicalData = airQuality
-//        } catch NetworkErrors.invalidRequest {
-//            print("error in network call")
-//        } catch APIErrors.invalidAPIKey {
-//            print("error in api-key")
-//        } catch {
-//            print(error)
-//        }
+        guard let currentLocation = locationManager.manager.location else { return }
+        do {
+            let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
+            let airQuality = try await networkManager.getHistoricalData(lon: lon, lat: lat, start: self.timeDifference.0, end: self.timeDifference.1)
+            self.historicalData = airQuality
+        } catch {
+            print(error)
+        }
     }
-    
 }

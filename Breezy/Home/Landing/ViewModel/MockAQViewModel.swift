@@ -12,15 +12,11 @@ import Foundation
 @Observable
 class MockAQViewModel: Locateable {
     
-    typealias Network = NetworkService
-    typealias Location = LocationService
+    let networkManager : any NetworkService
+    let locationManager: any LocationService
     
-    var networkManager : any NetworkService
-    var locationManager: any LocationService
     
-    var places = [(AirQuality,Placemark)]()
-    
-    required init(networkManager: any Network, locationManager: any Location ) {
+    required init(networkManager: any NetworkService, locationManager: any LocationService ) {
         self.networkManager = networkManager
         self.locationManager = locationManager
     }
@@ -38,23 +34,7 @@ class MockAQViewModel: Locateable {
     
     /// Mock Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveLocationAndUpdateData() async {
-        guard let currentLocation = locationManager.getLocation() else { return }
-//
-//        do {
-//            if locationManager.lastUpdated  {
-//                print("updating aq")
-//                let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
-//                let airQuality = try await networkManager.getPollutionData(lon: lon, lat: lat)
-//                guard let placemark = await locationManager.performGeoReverse() else { return }
-//                self.currAQ = (airQuality, placemark)
-//            }
-//        } catch let error as NetworkErrors  {
-//            print("error in network call")
-//        } catch APIErrors.invalidAPIKey {
-//            print("error in api-key")
-//        } catch {
-//            print(error)
-//        }
+        guard let currentLocation = locationManager.manager.location else { return }
         
     }
 }

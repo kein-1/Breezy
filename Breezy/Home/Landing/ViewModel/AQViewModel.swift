@@ -12,15 +12,11 @@ import CoreLocation
 // MARK: - ViewModel protocol. AnyObject to allow @Bindable since it expects a class
 protocol Locateable : Observable, AnyObject {
     
-    associatedtype Network
-    associatedtype Location
+    var networkManager : any NetworkService { get }
+    var locationManager: any LocationService { get }
     
-    var networkManager : Network { get }
-    var locationManager: Location { get }
+    init(networkManager: NetworkService, locationManager: LocationService )
     
-    init(networkManager: Network, locationManager: Location)
-    
-    var places : [(AirQuality,Placemark)] { get }
     var currAQ : (AirQuality,Placemark)?  { get }
     
     var _currAQData: AirQuality { get }
@@ -33,24 +29,18 @@ protocol Locateable : Observable, AnyObject {
 // MARK: - Home View's View Model
 @Observable
 class AQViewModel: Locateable {
-   
-    // Define type alias for the associated type, allowing more flexibility
-    // Say some other class wants to conform to this protocol. It can then change its definition of Network and Location
-    // I.e maybe we have some other service or implementation we want to use
-    typealias Network = NetworkService
-    typealias Location = LocationService
     
     // Use "any" to define this is an Existential Type (protocol as the type)
-    var networkManager : any NetworkService
-    var locationManager: any LocationService
+    let networkManager : any NetworkService
+    let locationManager: any LocationService
     
-    required init(networkManager: any Network, locationManager: any Location ) {
+    required init(networkManager: any NetworkService, locationManager: any LocationService) {
         self.networkManager = networkManager
         self.locationManager = locationManager
     }
     
     
-    var places = [(AirQuality,Placemark)]()
+    
     private (set) var currAQ : (AirQuality,Placemark)?
     private (set) var historicalData : AirQuality?
     
@@ -64,14 +54,24 @@ class AQViewModel: Locateable {
     
     /// Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveLocationAndUpdateData() async {
-        guard let currentLocation = locationManager.getLocation() else { return }
+        guard let currentLocation = locationManager.manager.location else {
+            print("error")
+            return
+        }
         do {
             if locationManager.shouldUpdate  {
                 print("updating aq")
                 let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
+                
                 let airQuality = try await networkManager.getPollutionData(lon: lon, lat: lat)
-                guard let placemark = await locationManager.performGeoReverse() else { return }
+                
+                guard let placemark = await locationManager.performGeoReverse() else {
+                    print("error in geo")
+                    return
+                }
+                
                 self.currAQ = (airQuality, placemark)
+                
             }
         } catch let error as NetworkErrors  {
             print("error in network call")

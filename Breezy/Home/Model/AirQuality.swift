@@ -9,8 +9,8 @@ import Foundation
 
 // MARK: - Air Quality Struct
 
-struct AirQuality: Codable {
-   
+struct AirQuality: Codable, Hashable {
+    
     let coord: Coord
     let list: [PrimaryData]
     
@@ -43,6 +43,15 @@ struct AirQuality: Codable {
                 "Per USA EPA guidelines, this is a health alert: the risk of health effects is increased for everyone."
             }
     }
+    
+    static func == (lhs: AirQuality, rhs: AirQuality) -> Bool {
+        lhs.list == rhs.list
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(list)
+    }
+    
 }
 
 // MARK: - Primary data
