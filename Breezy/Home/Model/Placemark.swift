@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Placemark {
+struct Placemark: Hashable {
     let name: String?
     let locality: String?
     let administrativeArea: String?

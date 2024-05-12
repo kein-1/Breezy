@@ -15,8 +15,9 @@ protocol LocationService {
     var threshold : CLLocationDistance { get }
     var shouldUpdate : Bool { get }
     
-    func performGeoReverse() async -> Placemark?
+    func performGeoReverse(lat: CLLocationDegrees, lon: CLLocationDegrees) async throws -> Placemark
 }
+
 
 class LocationManager: NSObject, LocationService {
     
@@ -24,6 +25,9 @@ class LocationManager: NSObject, LocationService {
     var threshold : CLLocationDistance = 300
     var shouldUpdate : Bool = false
     static var shared = LocationManager()
+    private lazy var geoCoder : CLGeocoder = {
+        CLGeocoder()
+    }()
     
     private override init() {
         super.init()
@@ -48,26 +52,27 @@ class LocationManager: NSObject, LocationService {
     }
     
     
-    /// Uses current CLLocation and retrieves a human readable content
-    /// - Returns: A Placemark model
-    func performGeoReverse() async -> Placemark? {
-        guard let currLocation = manager.location else { return nil }
+    
+    /// Uses given lat/lon to retrieve a human readable location
+    /// - Parameters:
+    ///   - lat: latitude
+    ///   - lon: longitude
+    /// - Returns: Placemark object containing the data
+    func performGeoReverse(lat: CLLocationDegrees, lon: CLLocationDegrees) async throws -> Placemark {
+        let location : CLLocation = CLLocation(latitude: lat, longitude: lon)
+        let placemarks = try await self.geoCoder.reverseGeocodeLocation(location)
         
-        let geoCoder = CLGeocoder()
-        guard let placemarks = try? await geoCoder.reverseGeocodeLocation(currLocation, preferredLocale: nil) else {
-            print("error in reverse geocode")
-            return nil
-        }
-                
+        var name : String?
+        var locality : String?
+        var administrativeArea : String?
+        var country : String?
         for placemark in placemarks {
-            let name = placemark.name
-            let locality = placemark.locality
-            let administrativeArea = placemark.administrativeArea
-            let country = placemark.country
-            let placeMark = Placemark(name: name, locality: locality, administrativeArea: administrativeArea, country: country)
-            return placeMark
+            name = placemark.name
+            locality = placemark.locality
+            administrativeArea = placemark.administrativeArea
+            country = placemark.country
         }
-        return nil
+        return Placemark(name: name, locality: locality, administrativeArea: administrativeArea, country: country)
     }
     
 }

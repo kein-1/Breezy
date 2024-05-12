@@ -11,7 +11,7 @@ import MapKit
 struct MapView: View {
     
     
-    @State var mapVM = MapViewModel(networkManager: NetworkManager(), locationManager: MapLocationManager())
+    @State var mapVM = MapViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
     var body: some View {
         MapReader { reader in
@@ -22,7 +22,7 @@ struct MapView: View {
                     }
                 }
             }
-            .mapStyle(.imagery)
+            .mapStyle(.standard)
             .onTapGesture(perform : { coord in
                 guard let point = reader.convert(coord, from: .local) else {
                     return

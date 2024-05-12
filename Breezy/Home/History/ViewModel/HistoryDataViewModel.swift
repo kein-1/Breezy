@@ -68,8 +68,8 @@ class HistoryDataViewModel : HistoricalDataProtocol {
     func retrieveHistoricalData() async {
         guard let currentLocation = locationManager.manager.location else { return }
         do {
-            let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
-            let airQuality = try await networkManager.getHistoricalData(lon: lon, lat: lat, start: self.timeDifference.0, end: self.timeDifference.1)
+            let (lat, lon) = (currentLocation.coordinate.latitude, currentLocation.coordinate.longitude)
+            let airQuality = try await networkManager.getHistoricalData(lat: lat, lon: lon, start: self.timeDifference.0, end: self.timeDifference.1)
             self.historicalData = airQuality
         } catch NetworkErrors.invalidRequest {
             print("error in network call")

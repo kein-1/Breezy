@@ -12,8 +12,8 @@ protocol NetworkService {
     
     var decoder: JSONDecoder { get }
     
-    func getPollutionData(lon: Double, lat: Double) async throws -> AirQuality
-    func getHistoricalData(lon: Double, lat: Double, start: TimeInterval, end: TimeInterval) async throws -> AirQuality
+    func getPollutionData(lat: Double, lon: Double) async throws -> AirQuality
+    func getHistoricalData(lat: Double, lon: Double, start: TimeInterval, end: TimeInterval) async throws -> AirQuality
 }
     
 
@@ -35,14 +35,13 @@ class NetworkManager: NetworkService {
         return decoder
     }()
     
-    func getPollutionData(lon: Double, lat: Double) async throws -> AirQuality {
+    func getPollutionData(lat: Double, lon: Double) async throws -> AirQuality {
         
         guard let key = ProcessInfo.processInfo.environment["API_KEY"] else {
             throw APIErrors.invalidAPIKey
         }
         
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/air_pollution?lat=\(lat)&lon=\(lon)&appid=\(key)") else {
-            
             throw NetworkErrors.invalidURL
         }
         
@@ -55,7 +54,7 @@ class NetworkManager: NetworkService {
         return airQuality
     }
     
-    func getHistoricalData(lon: Double, lat: Double, start: TimeInterval, end: TimeInterval) async throws -> AirQuality {
+    func getHistoricalData(lat: Double, lon: Double, start: TimeInterval, end: TimeInterval) async throws -> AirQuality {
         
         guard let key = ProcessInfo.processInfo.environment["API_KEY"] else {
             throw APIErrors.invalidAPIKey

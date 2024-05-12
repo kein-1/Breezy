@@ -49,7 +49,6 @@
 		8CF261B42BED5B3C002214FF /* CoordinateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261B32BED5B3B002214FF /* CoordinateExtensions.swift */; };
 		8CF261B62BEEC859002214FF /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261B52BEEC859002214FF /* MockNetworkManager.swift */; };
 		8CF261B82BEEC866002214FF /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261B72BEEC866002214FF /* MockLocationManager.swift */; };
-		8CF261BA2BEEC9A8002214FF /* MapLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261B92BEEC9A8002214FF /* MapLocationManager.swift */; };
 		8CF261BC2BF01D32002214FF /* CoordExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261BB2BF01D32002214FF /* CoordExtension.swift */; };
 		8CF261BE2BF0262E002214FF /* CustomMarkerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261BD2BF0262E002214FF /* CustomMarkerModel.swift */; };
 		8CF261C02BF029B4002214FF /* AQIMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261BF2BF029B4002214FF /* AQIMarkerView.swift */; };
@@ -119,7 +118,6 @@
 		8CF261B32BED5B3B002214FF /* CoordinateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateExtensions.swift; sourceTree = "<group>"; };
 		8CF261B52BEEC859002214FF /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		8CF261B72BEEC866002214FF /* MockLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
-		8CF261B92BEEC9A8002214FF /* MapLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationManager.swift; sourceTree = "<group>"; };
 		8CF261BB2BF01D32002214FF /* CoordExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordExtension.swift; sourceTree = "<group>"; };
 		8CF261BD2BF0262E002214FF /* CustomMarkerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerModel.swift; sourceTree = "<group>"; };
 		8CF261BF2BF029B4002214FF /* AQIMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQIMarkerView.swift; sourceTree = "<group>"; };
@@ -371,7 +369,6 @@
 				8CF261B52BEEC859002214FF /* MockNetworkManager.swift */,
 				8C7B978D2BB67B08005A7712 /* LocationManager.swift */,
 				8CF261B72BEEC866002214FF /* MockLocationManager.swift */,
-				8CF261B92BEEC9A8002214FF /* MapLocationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -584,7 +581,6 @@
 				8C6BB5E82BE49CA5000EF77A /* MockHistoryDataViewModel.swift in Sources */,
 				8C0C6B7B2BD23209001738DA /* PollutantDescription.swift in Sources */,
 				8C6BB5F62BEAEB59000EF77A /* RankingView.swift in Sources */,
-				8CF261BA2BEEC9A8002214FF /* MapLocationManager.swift in Sources */,
 				8CF261C02BF029B4002214FF /* AQIMarkerView.swift in Sources */,
 				8CF261B12BEBE0ED002214FF /* MapViewModel.swift in Sources */,
 				8C6BB5F02BEADBC9000EF77A /* MapView.swift in Sources */,

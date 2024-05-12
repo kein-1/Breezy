@@ -13,11 +13,12 @@ struct AQIMarkerView: View {
     var body: some View {
         
         Text(marker.aq._aqi.0, format: .number)
-            .foregroundStyle(.primary)
+            .foregroundStyle(.white)
+            .font(.system(size: 22).bold())
             .padding()
             .background {
                 Circle()
-                    .strokeBorder(ColorHelper.color(aqi: marker.aq._aqi.0), lineWidth: 5)
+                    .fill(ColorHelper.color(aqi: marker.aq._aqi.0))
             }
     }
 }

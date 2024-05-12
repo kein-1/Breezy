@@ -39,8 +39,6 @@ class AQViewModel: Locateable {
         self.locationManager = locationManager
     }
     
-    
-    
     private (set) var currAQ : (AirQuality,Placemark)?
     private (set) var historicalData : AirQuality?
     
@@ -61,16 +59,14 @@ class AQViewModel: Locateable {
         do {
             if locationManager.shouldUpdate  {
                 print("updating aq")
-                let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
+                let (lat,lon) = (currentLocation.coordinate.latitude,currentLocation.coordinate.longitude)
                 
-                let airQuality = try await networkManager.getPollutionData(lon: lon, lat: lat)
+                async let airQuality = networkManager.getPollutionData(lat: lat,lon: lon)
+                async let placemark = locationManager.performGeoReverse(lat: lat, lon: lon)
                 
-                guard let placemark = await locationManager.performGeoReverse() else {
-                    print("error in geo")
-                    return
-                }
+                let (aq,place) = try await (airQuality, placemark)
                 
-                self.currAQ = (airQuality, placemark)
+                self.currAQ = (aq,place)
                 
             }
         } catch let error as NetworkErrors  {

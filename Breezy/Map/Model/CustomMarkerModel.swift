@@ -11,11 +11,13 @@ import CoreLocation
 struct CustomMarkerModel : Hashable {
     let aq: AirQuality
     let coord : CLLocationCoordinate2D
+    let placeMark: Placemark
 }
 
 
 extension CustomMarkerModel {
     static let mockData: Self =
     CustomMarkerModel(aq: AirQuality.mockAQ,
-                      coord: .newYork)
+                      coord: .newYork,
+                      placeMark: .mockPlacemark)
 }

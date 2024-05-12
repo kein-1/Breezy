@@ -14,7 +14,7 @@ import _MapKit_SwiftUI
 protocol MapViewProtocol: AnyObject {
     
     var networkManager : any NetworkService { get }
-    var locationManager : any MapLocationService { get }
+    var locationManager : any LocationService { get }
     var markers: [CustomMarkerModel] { get }
     func requestLocation() -> CLLocation
 }
@@ -23,10 +23,10 @@ protocol MapViewProtocol: AnyObject {
 class MapViewModel: MapViewProtocol {
     
     let networkManager: any NetworkService
-    let locationManager:  any MapLocationService
+    let locationManager:  any LocationService
     var markers = [CustomMarkerModel]()
     
-    init(networkManager: any NetworkService, locationManager: any MapLocationService) {
+    init(networkManager: any NetworkService, locationManager: any LocationService) {
         self.networkManager = networkManager
         self.locationManager = locationManager
     }
@@ -41,6 +41,8 @@ class MapViewModel: MapViewProtocol {
         return location
     }
     
+    /// Setup the initial Map view's camera position
+    /// - Returns: A MapCameraPosition object based on the user's current location
     func retrievePosition() -> MapCameraPosition {
         guard let location = locationManager.manager.location else {
             return MapCameraPosition.automatic
@@ -48,14 +50,24 @@ class MapViewModel: MapViewProtocol {
         return MapCameraPosition.region(.init(center: location.coordinate, latitudinalMeters: 100, longitudinalMeters: 100))
     }
     
+    
+    
+    /// Makes a network call to a pin provided by the user then updates
+    /// the array
+    /// - Parameter coord: <#coord description#>
     func addCoordinate(coord: CLLocationCoordinate2D) async {
-        let (lon,lat) = (coord.longitude, coord.latitude)
-        guard let airQuality = try? await networkManager.getPollutionData(lon: lon, lat: lat) else {
-            return
+        let (lat,lon) = (coord.latitude,coord.longitude)
+        do {
+            async let airQuality = networkManager.getPollutionData(lat: lat, lon: lon)
+            async let placeMark = locationManager.performGeoReverse(lat: lat, lon: lon)
+            
+            let (aq,pm) = try await (airQuality, placeMark)
+            
+            let customMarkerModel = CustomMarkerModel(aq: aq, coord: coord, placeMark: pm)
+            markers.append(customMarkerModel)
+            print(markers)
+        } catch {
+            print(error)
         }
-        
-        let custtomMarkerModel = CustomMarkerModel(aq: airQuality, coord: coord)
-        markers.append(custtomMarkerModel)
-        print(markers)
     }
 }
