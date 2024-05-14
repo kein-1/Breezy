@@ -10,26 +10,19 @@ import CoreLocation
 
 struct HomeView : View {
     
-    
-//    
     @State var homeVM = AQViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-        @State var historyVM = HistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    @State var historyVM = HistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    @State var showData = false
 //    @State var homeVM = MockAQViewModel(networkManager: NetworkManager(), locationManager:  LocationManager.shared)
 //    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                if homeVM.currAQ == nil {
-                    GreetingView(homeVM: homeVM)
-                } else {
-                    PlaceCard(place: homeVM._currPlaceData, date: homeVM._currAQData._date)
-                    GaugeCard(aq: homeVM._currAQData)
-                    DescriptionCard(description: homeVM._currAQData.description)
-                    ActivitiesView(aq: homeVM._currAQData)
-                    PollutantCard(aq: homeVM._currAQData)
-                    HistoricalCard(historyVM: historyVM)
-                }
+        NavigationStack{
+            VStack {
+                GreetingView(homeVM: homeVM, showData: $showData)
+            }
+            .navigationDestination(isPresented: $showData) {
+                DataView(homeVM: homeVM, historyVM: historyVM)
             }
         }
     }

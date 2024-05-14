@@ -53,6 +53,8 @@
 		8CF261BE2BF0262E002214FF /* CustomMarkerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261BD2BF0262E002214FF /* CustomMarkerModel.swift */; };
 		8CF261C02BF029B4002214FF /* AQIMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261BF2BF029B4002214FF /* AQIMarkerView.swift */; };
 		8CF261C32BF02C3A002214FF /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261C22BF02C3A002214FF /* ColorHelper.swift */; };
+		8CF261C52BF3B19B002214FF /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261C42BF3B19B002214FF /* DataView.swift */; };
+		8CF261C72BF3C431002214FF /* CustomLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261C62BF3C431002214FF /* CustomLabelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +124,8 @@
 		8CF261BD2BF0262E002214FF /* CustomMarkerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerModel.swift; sourceTree = "<group>"; };
 		8CF261BF2BF029B4002214FF /* AQIMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQIMarkerView.swift; sourceTree = "<group>"; };
 		8CF261C22BF02C3A002214FF /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
+		8CF261C42BF3B19B002214FF /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
+		8CF261C62BF3C431002214FF /* CustomLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,7 @@
 			children = (
 				8C6BB5F12BEADE03000EF77A /* TabBar */,
 				8C0C6B762BD22B32001738DA /* HeaderLine.swift */,
+				8CF261C62BF3C431002214FF /* CustomLabelView.swift */,
 			);
 			path = ComponentViews;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				8C6BB5EA2BE6974C000EF77A /* GreetingView.swift */,
+				8CF261C42BF3B19B002214FF /* DataView.swift */,
 			);
 			path = Greeting;
 			sourceTree = "<group>";
@@ -567,6 +573,7 @@
 				8CF261C32BF02C3A002214FF /* ColorHelper.swift in Sources */,
 				8C0C6B842BD9B339001738DA /* PlaceCard.swift in Sources */,
 				8C0C6B792BD2312A001738DA /* Popover.swift in Sources */,
+				8CF261C72BF3C431002214FF /* CustomLabelView.swift in Sources */,
 				8C5CBFF12BB38454004080B9 /* ContentView.swift in Sources */,
 				8CF261BE2BF0262E002214FF /* CustomMarkerModel.swift in Sources */,
 				8C6BB5DE2BE47D8F000EF77A /* ChartCard.swift in Sources */,
@@ -580,6 +587,7 @@
 				8C6BB5EB2BE6974C000EF77A /* GreetingView.swift in Sources */,
 				8C6BB5E82BE49CA5000EF77A /* MockHistoryDataViewModel.swift in Sources */,
 				8C0C6B7B2BD23209001738DA /* PollutantDescription.swift in Sources */,
+				8CF261C52BF3B19B002214FF /* DataView.swift in Sources */,
 				8C6BB5F62BEAEB59000EF77A /* RankingView.swift in Sources */,
 				8CF261C02BF029B4002214FF /* AQIMarkerView.swift in Sources */,
 				8CF261B12BEBE0ED002214FF /* MapViewModel.swift in Sources */,
