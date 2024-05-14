@@ -52,6 +52,7 @@ struct GreetingView<_ViewModel: Locateable>: View {
                     CustomLabelView(title: "Search or enter address", sysImg: "magnifyingglass")
                 }
             }
+            .fixedSize(horizontal: true, vertical: false) // take up as much width as needed by children
             Spacer()
         }
         .frame( maxWidth: .infinity, maxHeight: .infinity)

@@ -16,6 +16,7 @@ struct CustomLabelView: View {
             .font(.system(size: 14).bold())
             .textCase(.uppercase)
             .foregroundStyle(.white)
+            .frame(maxWidth: .infinity) // take up as much width as possible
             .padding()
             .background(.teal.opacity(0.6))
             .clipShape(.capsule)
