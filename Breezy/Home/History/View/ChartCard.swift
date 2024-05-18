@@ -9,9 +9,9 @@ import SwiftUI
 import Charts
 
 
-struct ChartCard<_ViewModel: HistoricalDataProtocol> : View {
+struct ChartCard<T: HistoricalDataProtocol> : View {
     
-    @Bindable var historyVM: _ViewModel
+    @Bindable var historyVM: T
     var body: some View {
         Chart {
             ForEach(historyVM.currHistoricalData, id: \.self) { primaryData in

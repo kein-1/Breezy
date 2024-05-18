@@ -8,7 +8,8 @@
 import Foundation
 import CoreLocation
 
-struct CustomMarkerModel : Hashable {
+struct CustomMarkerModel : Hashable, Identifiable {
+    var id = UUID()
     let aq: AirQuality
     let coord : CLLocationCoordinate2D
     let placeMark: Placemark
@@ -20,4 +21,15 @@ extension CustomMarkerModel {
     CustomMarkerModel(aq: AirQuality.mockAQ,
                       coord: .newYork,
                       placeMark: .mockPlacemark)
+    
+    static let mockDataArray: [Self] = [
+                    
+        CustomMarkerModel(aq: AirQuality.mockAQ,
+                          coord: .newYork,
+                          placeMark: .mockPlacemark),
+        
+        CustomMarkerModel(aq: AirQuality.mockAQ,
+                          coord: .boston,
+                          placeMark: .mockPlacemarkBoston)
+        ]
 }

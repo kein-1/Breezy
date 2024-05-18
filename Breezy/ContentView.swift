@@ -11,7 +11,6 @@ struct ContentView: View {
     
     @State var selectedTab : Tab = .house
     
-    
     init() {
         // TabView creates some space that we don't need so use this
         UITabBar.appearance().isHidden = true

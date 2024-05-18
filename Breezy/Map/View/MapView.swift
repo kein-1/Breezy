@@ -13,30 +13,33 @@ struct MapView: View {
     
     @State var mapVM = MapViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
+//    @State var mapVM = MockMapViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    
     var body: some View {
         MapReader { reader in
             Map(initialPosition: mapVM.retrievePosition()) {
                 ForEach(mapVM.markers, id:\.self) { marker in
                     Annotation("", coordinate: marker.coord) {
-                        AQIMarkerView(marker: marker)
+                        AQIMarkerView(mapVM: mapVM, marker: marker)
                     }
                 }
             }
             .mapStyle(.standard)
-            .onTapGesture(perform : { coord in
-                guard let point = reader.convert(coord, from: .local) else {
-                    return
-                }
-                Task {
-                    await mapVM.addCoordinate(coord: point)
-                }
-            })
-            
+            .sheet(item: $mapVM.selectedMarker) { marker in
+                LocationContent(content: marker)
+                        .presentationDetents([.height(175)])
+            }
         }
     }
-    
 }
 
 #Preview {
     MapView()
 }
+
+//
+//
+//.sheet(isPresented: $mapVM.sheetSelection) {
+//    LocationContent(content: mapVM.selectedMarker!)
+//        .presentationDetents([.height(175)])
+//}

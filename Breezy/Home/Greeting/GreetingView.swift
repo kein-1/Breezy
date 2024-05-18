@@ -35,7 +35,7 @@ struct GreetingView<_ViewModel: Locateable>: View {
                     .font(.system(size: 16))
             }
             .frame(height: 150)
-            .padding([.bottom,.leading,.trailing])
+            .padding([.leading,.trailing])
             
             VStack(spacing: 20) {
                 Button {
@@ -52,16 +52,15 @@ struct GreetingView<_ViewModel: Locateable>: View {
                     CustomLabelView(title: "Search or enter address", sysImg: "magnifyingglass")
                 }
             }
-            .fixedSize(horizontal: true, vertical: false) // take up as much width as needed by children
+            .fixedSize(horizontal: true, vertical: false) // causes size to be as large as it needs (ideal size) to fit its contents. Ignores frame modifiers
             Spacer()
         }
-        .frame( maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
-        .background(.ultraThickMaterial)
     }
 }
-
-#Preview {
-    @State var homeVM = MockAQViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-    return GreetingView(homeVM: homeVM, showData: .constant(false))
-}
+//
+//#Preview {
+//    @State var homeVM = MockAQViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+//    return GreetingView(homeVM: homeVM, showData: .constant(false))
+//}

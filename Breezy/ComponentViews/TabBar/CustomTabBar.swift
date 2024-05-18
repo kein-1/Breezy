@@ -27,16 +27,16 @@ struct CustomTabBar: View {
                         Circle()
                             .foregroundStyle(selectedTab == tab ? .teal.opacity(0.6) : .clear)
                     }
+                    
             }
         }
         .background {
             Capsule()
                 .fill(.ultraThickMaterial)
         }
-//        .padding()
     }
 }
-//
-//#Preview {
-//    CustomTabBar(selectedTab: .constant(.house))
-//}
+
+#Preview {
+    CustomTabBar(selectedTab: .constant(.house))
+}

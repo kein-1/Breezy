@@ -25,4 +25,12 @@ extension Placemark {
             administrativeArea: "California",
             country: "United States"
         )
+    
+    static let mockPlacemarkBoston: Self =
+        Placemark(
+            name: "Boston",
+            locality: "Boston",
+            administrativeArea: "Massachusetts",
+            country: "United States"
+        )
 }

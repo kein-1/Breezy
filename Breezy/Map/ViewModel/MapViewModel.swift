@@ -11,25 +11,47 @@ import MapKit
 import _MapKit_SwiftUI
 
 
-protocol MapViewProtocol: AnyObject {
+protocol MapViewProtocol: Observable, AnyObject {
     
     var networkManager : any NetworkService { get }
     var locationManager : any LocationService { get }
     var markers: [CustomMarkerModel] { get }
+    
+    var selectedMarker: CustomMarkerModel? { get set }
+    
     func requestLocation() -> CLLocation
+    
 }
 
 @Observable
 class MapViewModel: MapViewProtocol {
     
+    
+    
     let networkManager: any NetworkService
     let locationManager:  any LocationService
     var markers = [CustomMarkerModel]()
     
+    var selectedMarker: CustomMarkerModel? = nil {
+        didSet {
+            if selectedMarker == nil {
+                print("changed to nil ")
+            } else {
+                print("not nil")
+            }
+        }
+    }
+    
+    
     init(networkManager: any NetworkService, locationManager: any LocationService) {
         self.networkManager = networkManager
         self.locationManager = locationManager
+        
+        
+        self.markers = CustomMarkerModel.mockDataArray
     }
+    
+    
     
     func requestLocation() -> CLLocation {
         guard let location = locationManager.manager.location else {
@@ -44,10 +66,7 @@ class MapViewModel: MapViewProtocol {
     /// Setup the initial Map view's camera position
     /// - Returns: A MapCameraPosition object based on the user's current location
     func retrievePosition() -> MapCameraPosition {
-        guard let location = locationManager.manager.location else {
-            return MapCameraPosition.automatic
-        }
-        return MapCameraPosition.region(.init(center: location.coordinate, latitudinalMeters: 100, longitudinalMeters: 100))
+        MapCameraPosition.region(MKCoordinateRegion(center: markers.first!.coord, span: .init(latitudeDelta: 10, longitudeDelta: 10)))
     }
     
     
