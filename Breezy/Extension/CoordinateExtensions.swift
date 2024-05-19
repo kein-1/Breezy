@@ -8,6 +8,8 @@
 import Foundation
 import MapKit
 
+
+// MARK: - CLLocationCoordinat2D extensions
 extension CLLocationCoordinate2D {
     static let newYork : Self = CLLocationCoordinate2D(latitude: 40.73, longitude: -73.93)
     static let boston : Self = CLLocationCoordinate2D(latitude: 42.36, longitude: -71.05)
@@ -26,3 +28,4 @@ extension CLLocationCoordinate2D: Hashable {
         hasher.combine(longitude)
     }
 }
+

@@ -11,6 +11,7 @@ import Foundation
 // MARK: - Home View's View Model
 @Observable
 class MockAQViewModel: Locateable {
+   
     
     let networkManager : any NetworkService
     let locationManager: any LocationService
@@ -21,16 +22,20 @@ class MockAQViewModel: Locateable {
         self.locationManager = locationManager
     }
     
-    private (set) var currAQ : (AirQuality,Placemark)? = (AirQuality.mockAQ, Placemark.mockPlacemark)
+    var currAirQualityPlacemark: AirQualityPlacemark?
     
-    var _currAQData: AirQuality {
-        AirQuality.mockAQ
+    var currAirQuality : AirQuality {
+        currAirQualityPlacemark?.aq ?? AirQuality.mockAQ
     }
     
-    var _currPlaceData: Placemark{
-        Placemark.mockPlacemark
+    var currPlacemark: Placemark {
+        currAirQualityPlacemark?.placemark ?? Placemark.mockPlacemark
     }
     
+    var showCurrentLocationData: Bool = false
+    var searchedAQ: AirQualityPlacemark?
+    
+ 
     
     /// Mock Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveLocationAndUpdateData() async {

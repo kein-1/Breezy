@@ -10,25 +10,31 @@ import CoreLocation
 
 struct HomeView : View {
     
-//    @State var homeVM = AQViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-//    @State var historyVM = HistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-    @State var showData = false
-    @State var homeVM = MockAQViewModel(networkManager: NetworkManager(), locationManager:  LocationManager.shared)
-    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    @State var homeVM = AQViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    @State var historyVM = HistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    
+//    @State var homeVM = MockAQViewModel(networkManager: NetworkManager(), locationManager:  LocationManager.shared)
+//    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
     var body: some View {
         NavigationStack{
             VStack {
-                GreetingView(homeVM: homeVM, showData: $showData)
+                GreetingView()
+                    .environment(\.airQualityVM, homeVM)
             }
-            .navigationDestination(isPresented: $showData) {
-                DataView(homeVM: homeVM, historyVM: historyVM)
+            .navigationDestination(isPresented: $homeVM.showCurrentLocationData) {
+                DataView()
+                    .environment(\.airQualityVM, homeVM)
+                    .environment(\.historyVM, historyVM)
+            }
+            .navigationDestination(item: $homeVM.searchedAQ) { data in
+                Text(data.aq.description)
             }
         }
     }
 }
 
-//
-//#Preview {
-//   HomeView()
-//}
+
+#Preview {
+   HomeView()
+}

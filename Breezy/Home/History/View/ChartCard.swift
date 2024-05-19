@@ -9,12 +9,12 @@ import SwiftUI
 import Charts
 
 
-struct ChartCard<T: HistoricalDataProtocol> : View {
+struct ChartCard : View {
     
-    @Bindable var historyVM: T
+    let historyData : [PrimaryData]
     var body: some View {
         Chart {
-            ForEach(historyVM.currHistoricalData, id: \.self) { primaryData in
+            ForEach(historyData, id: \.self) { primaryData in
                 CustomBarMarkView(primaryData: primaryData)
             }
         }

@@ -9,9 +9,7 @@ import SwiftUI
 import CoreLocationUI
 
 
-struct GreetingView<_ViewModel: Locateable>: View {
-    @Bindable var homeVM : _ViewModel
-    @Binding var showData : Bool
+struct GreetingView : View {
     
     var body: some View {
         VStack {
@@ -37,22 +35,7 @@ struct GreetingView<_ViewModel: Locateable>: View {
             .frame(height: 150)
             .padding([.leading,.trailing])
             
-            VStack(spacing: 20) {
-                Button {
-                    showData.toggle()
-                    Task {
-                        await homeVM.retrieveLocationAndUpdateData()
-                    }
-                } label: {
-                   CustomLabelView(title: "Get current location", sysImg: "location")
-                }
-                Button {
-                    // TODO:
-                } label: {
-                    CustomLabelView(title: "Search or enter address", sysImg: "magnifyingglass")
-                }
-            }
-            .fixedSize(horizontal: true, vertical: false) // causes size to be as large as it needs (ideal size) to fit its contents. Ignores frame modifiers
+            ButtonStackView()
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -11,15 +11,16 @@ import SwiftUI
 /// Generics for a protocol binding
 /// Cannot apply PropertyWrappers to protocols and extensions
 ///
-struct HistoricalCard<T: HistoricalDataProtocol> : View {
+struct HistoricalCard : View {
     
-    @Bindable var historyVM : T
+    @Environment (\.historyVM) private var historyVM
+    
     var body: some View {
         VStack {
             Section {
                 HStack (spacing: 5){
-                    ForEach(Historical.allCases, id: \.rawValue) { time in
-                        HistoricalButtonView(historyVM: historyVM, time: time, title: time.rawValue)
+                    ForEach(TimeFrame.allCases, id: \.rawValue) { time in
+                        HistoricalButtonView(time: time, title: time.rawValue)
                     }
                 }
                 .padding()
@@ -28,7 +29,7 @@ struct HistoricalCard<T: HistoricalDataProtocol> : View {
                 HeaderLine(title: "Past Air Quality")
             }
             Section {
-                ChartCard(historyVM: historyVM)
+                ChartCard(historyData: historyVM.currHistoricalData)
             }
         }
         .padding()
@@ -38,15 +39,15 @@ struct HistoricalCard<T: HistoricalDataProtocol> : View {
         
     }
 }
-
-#Preview {
-    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-    
-    return HistoricalCard(historyVM: historyVM)
-}
-
-
-
+//
+//#Preview {
+//    @State var historyVM = MockHistoryDataViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+//    
+//    return HistoricalCard(historyVM: historyVM)
+//}
+//
+//
+//
 
 
 

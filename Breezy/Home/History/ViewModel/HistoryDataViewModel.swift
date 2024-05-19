@@ -18,7 +18,7 @@ protocol HistoricalDataProtocol : Observable, AnyObject {
     
     var historicalData : AirQuality? { get }
     var currHistoricalData: [PrimaryData] { get }
-    var currentHistory: Historical { get set }
+    var currentHistory: TimeFrame { get set }
     var timeDifference: (start: TimeInterval, end: TimeInterval) { get }
     
     func retrieveHistoricalData() async -> Void
@@ -48,7 +48,7 @@ class HistoryDataViewModel : HistoricalDataProtocol {
         return primaryData.sorted(by: { $0.dt < $1.dt })
     }
     
-    var currentHistory: Historical = .week
+    var currentHistory: TimeFrame = .week
     
     var timeDifference: (start: TimeInterval, end: TimeInterval) {
         let end  = Date()

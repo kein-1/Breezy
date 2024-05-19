@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct PlaceCard: View {
+    
+    
     let place : Placemark
     let date: Date
+    
     var body: some View {
         VStack(alignment: .leading) {
             

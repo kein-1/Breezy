@@ -17,7 +17,7 @@ struct MapView: View {
     
     var body: some View {
         MapReader { reader in
-            Map(initialPosition: mapVM.retrievePosition()) {
+            Map(position: $mapVM.cameraPosition) {
                 ForEach(mapVM.markers, id:\.self) { marker in
                     Annotation("", coordinate: marker.coord) {
                         AQIMarkerView(mapVM: mapVM, marker: marker)
@@ -25,10 +25,13 @@ struct MapView: View {
                 }
             }
             .mapStyle(.standard)
-            .sheet(item: $mapVM.selectedMarker) { marker in
-                LocationContent(content: marker)
+            .sheet(item: $mapVM.selectedMarker) { marker in // bind sheet to show based on selected value
+                LocationContentView(content: marker)
                         .presentationDetents([.height(175)])
             }
+        }
+        .task {
+            await mapVM.initializeMarker()
         }
     }
 }

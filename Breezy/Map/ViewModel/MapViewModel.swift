@@ -15,11 +15,15 @@ protocol MapViewProtocol: Observable, AnyObject {
     
     var networkManager : any NetworkService { get }
     var locationManager : any LocationService { get }
+    
     var markers: [CustomMarkerModel] { get }
-    
     var selectedMarker: CustomMarkerModel? { get set }
+    func initializeMarker() async
     
-    func requestLocation() -> CLLocation
+    func configureLocationContent(coord: CLLocationCoordinate2D, setup: Bool) async
+    
+    var cameraPosition : MapCameraPosition { get }
+    func updateCameraPosition()
     
 }
 
@@ -46,35 +50,30 @@ class MapViewModel: MapViewProtocol {
     init(networkManager: any NetworkService, locationManager: any LocationService) {
         self.networkManager = networkManager
         self.locationManager = locationManager
-        
-        
-        self.markers = CustomMarkerModel.mockDataArray
     }
     
-    
-    
-    func requestLocation() -> CLLocation {
+    func initializeMarker() async {
         guard let location = locationManager.manager.location else {
             print("no last")
-            return CLLocation()
+            self.selectedMarker = CustomMarkerModel.mockData
+            return
         }
-        print("location is good !")
-        print(location)
-        return location
-    }
-    
-    /// Setup the initial Map view's camera position
-    /// - Returns: A MapCameraPosition object based on the user's current location
-    func retrievePosition() -> MapCameraPosition {
-        MapCameraPosition.region(MKCoordinateRegion(center: markers.first!.coord, span: .init(latitudeDelta: 10, longitudeDelta: 10)))
+        await configureLocationContent(coord: location.coordinate, setup: true)
     }
     
     
+    var cameraPosition : MapCameraPosition = MapCameraPosition.userLocation(fallback: .automatic)
     
-    /// Makes a network call to a pin provided by the user then updates
-    /// the array
-    /// - Parameter coord: <#coord description#>
-    func addCoordinate(coord: CLLocationCoordinate2D) async {
+    func updateCameraPosition() {
+        
+    }
+    
+    
+    /// Sets up the custom marker
+    /// - Parameters:
+    ///   - coord: The location coordiante
+    ///   - setup: Either the first time it is rendered or not
+    func configureLocationContent(coord: CLLocationCoordinate2D, setup: Bool) async {
         let (lat,lon) = (coord.latitude,coord.longitude)
         do {
             async let airQuality = networkManager.getPollutionData(lat: lat, lon: lon)
@@ -84,6 +83,9 @@ class MapViewModel: MapViewProtocol {
             
             let customMarkerModel = CustomMarkerModel(aq: aq, coord: coord, placeMark: pm)
             markers.append(customMarkerModel)
+            if setup {
+                self.selectedMarker = customMarkerModel
+            }
             print(markers)
         } catch {
             print(error)

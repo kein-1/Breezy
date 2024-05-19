@@ -8,23 +8,10 @@
 import SwiftUI
 
 struct GaugeCard: View {
-    let aq: AirQuality
     
-    var color: Color {
-        switch aq._aqi.0 {
-            case 1,2:
-                Color.green
-            case 3:
-                Color.orange
-            case 4:
-                Color.purple
-            default:
-                Color.red
-        }
-    }
+    let aq : AirQuality
     
     var body: some View {
-        
         Gauge(
             value: Double(aq._aqi.0),
             in: 1...5,
@@ -40,7 +27,7 @@ struct GaugeCard: View {
             }
         )
         .gaugeStyle(.accessoryCircularCapacity)
-        .tint(color)
+        .tint(ColorHelper.color(aqi: aq._aqi.0))
         .frame(minWidth: 150, minHeight: 150)
         .scaleEffect(2)
     }

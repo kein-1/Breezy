@@ -23,3 +23,5 @@ Notes :
 - Read about "some", "any", generics, and static/dynamic dispatch
 - MapReader allows MapKit to read user taps and convert it to coordinates in iOS 17
 - CoreLocationUI has an interesting new LocationButton feature
+- https://stackoverflow.com/questions/14214741/xcode-environment-variables-not-present-during-archive/74254208#74254208 - tip on storing API key for acess outside of Xcode (test flight / appstore ex)
+

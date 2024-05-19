@@ -33,7 +33,7 @@ class MockHistoryDataViewModel : HistoricalDataProtocol {
         return primaryData.sorted(by: { $0.dt < $1.dt })
     }
     
-    var currentHistory: Historical = .week
+    var currentHistory: TimeFrame = .week
     
     var timeDifference: (start: TimeInterval, end: TimeInterval) {
         let end  = Date()

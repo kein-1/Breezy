@@ -17,18 +17,23 @@ protocol Locateable : Observable, AnyObject {
     
     init(networkManager: NetworkService, locationManager: LocationService )
     
-    var currAQ : (AirQuality,Placemark)?  { get }
+    var currAirQualityPlacemark : AirQualityPlacemark?  { get }
+    var currAirQuality: AirQuality { get }
+    var currPlacemark: Placemark { get }
     
-    var _currAQData: AirQuality { get }
-    var _currPlaceData: Placemark { get }
+    var showCurrentLocationData: Bool { get set }
+    var searchedAQ: AirQualityPlacemark? { get set}
     
     func retrieveLocationAndUpdateData() async -> Void
+    
 }
 
 
 // MARK: - Home View's View Model
 @Observable
 class AQViewModel: Locateable {
+    
+    
     
     // Use "any" to define this is an Existential Type (protocol as the type)
     let networkManager : any NetworkService
@@ -39,16 +44,18 @@ class AQViewModel: Locateable {
         self.locationManager = locationManager
     }
     
-    private (set) var currAQ : (AirQuality,Placemark)?
-    private (set) var historicalData : AirQuality?
+    var currAirQualityPlacemark: AirQualityPlacemark?
     
-    var _currAQData: AirQuality {
-        currAQ?.0 ?? AirQuality.mockAQ
+    var currAirQuality : AirQuality {
+        currAirQualityPlacemark?.aq ?? AirQuality.mockAQ
     }
     
-    var _currPlaceData: Placemark {
-        currAQ?.1 ?? Placemark.mockPlacemark
+    var currPlacemark: Placemark {
+        currAirQualityPlacemark?.placemark ?? Placemark.mockPlacemark
     }
+    
+    var showCurrentLocationData: Bool = false
+    var searchedAQ: AirQualityPlacemark?
     
     /// Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveLocationAndUpdateData() async {
@@ -56,6 +63,7 @@ class AQViewModel: Locateable {
             print("error")
             return
         }
+        
         do {
             if locationManager.shouldUpdate  {
                 print("updating aq")
@@ -66,8 +74,7 @@ class AQViewModel: Locateable {
                 
                 let (aq,place) = try await (airQuality, placemark)
                 
-                self.currAQ = (aq,place)
-                
+                self.currAirQualityPlacemark = AirQualityPlacemark(aq: aq, placemark: place)
             }
         } catch let error as NetworkErrors  {
             print("error in network call")

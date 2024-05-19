@@ -11,6 +11,7 @@ import CoreLocation
 
 /// Protocol for Location Service
 protocol LocationService {
+    
     var manager : CLLocationManager { get }
     var threshold : CLLocationDistance { get }
     var shouldUpdate : Bool { get }
