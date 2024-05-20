@@ -54,6 +54,8 @@
 		8CD5859B2BFA85F50072C742 /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5859A2BFA85F50072C742 /* ButtonStackView.swift */; };
 		8CD5859E2BFA89500072C742 /* LocateableKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5859D2BFA89500072C742 /* LocateableKey.swift */; };
 		8CD585A02BFAA0CB0072C742 /* HistoryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5859F2BFAA0CB0072C742 /* HistoryKey.swift */; };
+		8CD585A22BFAE9430072C742 /* PollutantDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD585A12BFAE9430072C742 /* PollutantDetail.swift */; };
+		8CD585A42BFAF7F40072C742 /* SearchableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD585A32BFAF7F40072C742 /* SearchableView.swift */; };
 		8CF261B12BEBE0ED002214FF /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261B02BEBE0ED002214FF /* MapViewModel.swift */; };
 		8CF261B42BED5B3C002214FF /* CoordinateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261B32BED5B3B002214FF /* CoordinateExtensions.swift */; };
 		8CF261B62BEEC859002214FF /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261B52BEEC859002214FF /* MockNetworkManager.swift */; };
@@ -61,7 +63,6 @@
 		8CF261BE2BF0262E002214FF /* CustomMarkerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261BD2BF0262E002214FF /* CustomMarkerModel.swift */; };
 		8CF261C02BF029B4002214FF /* AQIMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261BF2BF029B4002214FF /* AQIMarkerView.swift */; };
 		8CF261C32BF02C3A002214FF /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261C22BF02C3A002214FF /* ColorHelper.swift */; };
-		8CF261C52BF3B19B002214FF /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261C42BF3B19B002214FF /* DataView.swift */; };
 		8CF261C72BF3C431002214FF /* CustomLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261C62BF3C431002214FF /* CustomLabelView.swift */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +134,8 @@
 		8CD5859A2BFA85F50072C742 /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
 		8CD5859D2BFA89500072C742 /* LocateableKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocateableKey.swift; sourceTree = "<group>"; };
 		8CD5859F2BFAA0CB0072C742 /* HistoryKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryKey.swift; sourceTree = "<group>"; };
+		8CD585A12BFAE9430072C742 /* PollutantDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutantDetail.swift; sourceTree = "<group>"; };
+		8CD585A32BFAF7F40072C742 /* SearchableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableView.swift; sourceTree = "<group>"; };
 		8CF261B02BEBE0ED002214FF /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		8CF261B32BED5B3B002214FF /* CoordinateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateExtensions.swift; sourceTree = "<group>"; };
 		8CF261B52BEEC859002214FF /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
@@ -140,7 +143,6 @@
 		8CF261BD2BF0262E002214FF /* CustomMarkerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerModel.swift; sourceTree = "<group>"; };
 		8CF261BF2BF029B4002214FF /* AQIMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQIMarkerView.swift; sourceTree = "<group>"; };
 		8CF261C22BF02C3A002214FF /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
-		8CF261C42BF3B19B002214FF /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		8CF261C62BF3C431002214FF /* CustomLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -344,8 +346,8 @@
 			isa = PBXGroup;
 			children = (
 				8C6BB5EA2BE6974C000EF77A /* GreetingView.swift */,
-				8CF261C42BF3B19B002214FF /* DataView.swift */,
 				8CD5859A2BFA85F50072C742 /* ButtonStackView.swift */,
+				8CD585A32BFAF7F40072C742 /* SearchableView.swift */,
 			);
 			path = Greeting;
 			sourceTree = "<group>";
@@ -385,6 +387,7 @@
 				8C0C6B6A2BCD9D5A001738DA /* PollutantTheme.swift */,
 				8C0C6B7A2BD23209001738DA /* PollutantDescription.swift */,
 				8CD585982BFA7A6D0072C742 /* AirQualityPlacemark.swift */,
+				8CD585A12BFAE9430072C742 /* PollutantDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -632,7 +635,7 @@
 				8CD5859E2BFA89500072C742 /* LocateableKey.swift in Sources */,
 				8C0C6B7B2BD23209001738DA /* PollutantDescription.swift in Sources */,
 				8CD585952BFA772B0072C742 /* AirQualityExtension.swift in Sources */,
-				8CF261C52BF3B19B002214FF /* DataView.swift in Sources */,
+				8CD585A22BFAE9430072C742 /* PollutantDetail.swift in Sources */,
 				8C6BB5F62BEAEB59000EF77A /* RankingView.swift in Sources */,
 				8CF261C02BF029B4002214FF /* AQIMarkerView.swift in Sources */,
 				8CF261B12BEBE0ED002214FF /* MapViewModel.swift in Sources */,
@@ -652,6 +655,7 @@
 				8CD585A02BFAA0CB0072C742 /* HistoryKey.swift in Sources */,
 				8CD5858E2BF948C40072C742 /* MapViewOld.swift in Sources */,
 				8C0C6B6F2BCDC143001738DA /* PollutantCard.swift in Sources */,
+				8CD585A42BFAF7F40072C742 /* SearchableView.swift in Sources */,
 				8C0C6B7D2BD99076001738DA /* GaugeCard.swift in Sources */,
 				8C0C6B772BD22B32001738DA /* HeaderLine.swift in Sources */,
 				8C6BB5D22BD9C0E2000EF77A /* DescriptionCard.swift in Sources */,

@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum PollutantDescription{
+enum PollutantDescription : CaseIterable, Codable {
     case pm25
     case pm10
     case so2
@@ -27,7 +27,7 @@ enum PollutantDescription{
         }
     }
     
-    var description: String {
+    var summary: String {
         switch self {
             case .pm25:
                 return "PM2.5: Particulate Matter with a diameter of 2.5 micrometers or less. PM2.5 can penetrate deep into the lungs and even enter the bloodstream, posing health risks such as respiratory and cardiovascular issues"

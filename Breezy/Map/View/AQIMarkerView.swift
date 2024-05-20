@@ -21,7 +21,7 @@ struct AQIMarkerView<T: MapViewProtocol>: View {
                 .padding()
                 .background {
                     Circle()
-                        .fill(ColorHelper.color(aqi: marker.aq._aqi.0))
+                        .fill(ColorHelper.aqiColor(aqi: marker.aq._aqi.0))
                 }
                 .onTapGesture {
                     mapVM.selectedMarker = marker

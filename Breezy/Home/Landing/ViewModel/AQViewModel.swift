@@ -33,8 +33,6 @@ protocol Locateable : Observable, AnyObject {
 @Observable
 class AQViewModel: Locateable {
     
-    
-    
     // Use "any" to define this is an Existential Type (protocol as the type)
     let networkManager : any NetworkService
     let locationManager: any LocationService
@@ -44,7 +42,15 @@ class AQViewModel: Locateable {
         self.locationManager = locationManager
     }
     
-    var currAirQualityPlacemark: AirQualityPlacemark?
+    var currAirQualityPlacemark: AirQualityPlacemark? {
+        didSet {
+            if self == nil {
+                print("i am nil now")
+            } else {
+                print("i am not nil")
+            }
+        }
+    }
     
     var currAirQuality : AirQuality {
         currAirQualityPlacemark?.aq ?? AirQuality.mockAQ
@@ -55,7 +61,15 @@ class AQViewModel: Locateable {
     }
     
     var showCurrentLocationData: Bool = false
-    var searchedAQ: AirQualityPlacemark?
+    var searchedAQ: AirQualityPlacemark? = nil {
+        didSet {
+            if self == nil {
+                print("i am nil now123")
+            } else {
+                print("i am not nil123")
+            }
+        }
+    }
     
     /// Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveLocationAndUpdateData() async {

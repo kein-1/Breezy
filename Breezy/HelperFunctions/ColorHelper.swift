@@ -9,7 +9,7 @@ import SwiftUI
 
 class ColorHelper {
     
-    static func color(aqi: Int) -> Color  {
+    static func aqiColor(aqi: Int) -> Color  {
         
         var color : Color
         
@@ -25,4 +25,20 @@ class ColorHelper {
         }
         return color
     }
+    
+    static func pollutantColor(colorString: String) -> Color {
+        switch colorString {
+            case "Green":
+                Color.green
+            case "Teal":
+                Color.teal
+            case "Orange":
+                Color.orange
+            case "Purple":
+                Color.purple
+            default:
+                Color.red
+        }
+    }
+    
 }

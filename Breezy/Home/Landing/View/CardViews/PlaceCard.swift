@@ -10,25 +10,24 @@ import SwiftUI
 struct PlaceCard: View {
     
     
-    let place : Placemark
-    let date: Date
+    let aqPM: AirQualityPlacemark
     
     var body: some View {
         VStack(alignment: .leading) {
             
-            Label(place.name ?? "", systemImage: "mappin.circle")
+            Label(aqPM.placemark.name ?? "", systemImage: "mappin.circle")
                 .font(.system(size: 24))
             
             Group {
-                if let locality = place.locality {
-                    Text(locality + ", " + (place.administrativeArea ?? ""))
+                if let locality = aqPM.placemark.locality {
+                    Text(locality + ", " + (aqPM.placemark.administrativeArea ?? ""))
                 } else {
-                    Text((place.administrativeArea ?? "") + ", " + (place.country ?? ""))
+                    Text((aqPM.placemark.administrativeArea ?? "") + ", " + (aqPM.placemark.country ?? ""))
                 }
             }
             .font(.system(size: 16))
             
-            Text(date.formatted(date: .abbreviated, time: .omitted))
+            Text(aqPM.aq._date.formatted(date: .abbreviated, time: .omitted))
                 .foregroundStyle(.gray)
                 .font(.system(size: 14))
         }

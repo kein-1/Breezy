@@ -22,10 +22,19 @@ struct HomeView : View {
                 GreetingView()
                     .environment(\.airQualityVM, homeVM)
             }
-            .navigationDestination(isPresented: $homeVM.showCurrentLocationData) {
-                DataView()
-                    .environment(\.airQualityVM, homeVM)
-                    .environment(\.historyVM, historyVM)
+            .navigationDestination(item: $homeVM.currAirQualityPlacemark) { airQuality in
+                ScrollView {
+                    LazyVStack {
+                        PlaceCard(aqPM: airQuality)
+                        GaugeCard(aqPM: airQuality)
+                        DescriptionCard(description: airQuality.aq.description)
+                        ActivitiesView(aqPM: airQuality)
+                        PollutantCard(aqPM: airQuality)
+                        HistoricalCard()
+                    }
+                }
+                .environment(\.airQualityVM, homeVM)
+                .environment(\.historyVM, historyVM)
             }
             .navigationDestination(item: $homeVM.searchedAQ) { data in
                 Text(data.aq.description)

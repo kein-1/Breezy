@@ -9,21 +9,7 @@ import SwiftUI
 
 struct ActivitiesView: View {
     
-    let aq: AirQuality
-    var color: Color {
-        switch aq.color {
-            case "Green":
-                Color.green
-            case "Teal":
-                Color.teal
-            case "Orange":
-                Color.orange
-            case "Purple":
-                Color.purple
-            default:
-                Color.red
-        }
-    }
+    let aqPM: AirQualityPlacemark
     
     let activities = ["Outdoor sports", "Bring baby out", "Eating outside"]
     
@@ -36,14 +22,10 @@ struct ActivitiesView: View {
                     .foregroundStyle(.white)
                     .background {
                         Capsule()
-                            .fill(color)
+                            .fill(ColorHelper.aqiColor(aqi: aqPM.aq._aqi.0))
                     }
             }
         }
         .padding()
     }
-}
-
-#Preview {
-    ActivitiesView(aq: AirQuality.mockAQ)
 }
