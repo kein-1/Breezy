@@ -11,9 +11,10 @@ import MapKit
 struct MapView: View {
     
     
-    @State var mapVM = MapViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+//    @State var mapVM = MapViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
     
-//    @State var mapVM = MockMapViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    @State var mapVM = MockMapViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
+    
     
     var body: some View {
         MapReader { reader in
@@ -25,10 +26,18 @@ struct MapView: View {
                 }
             }
             .mapStyle(.standard)
-            .sheet(item: $mapVM.selectedMarker) { marker in // bind sheet to show based on selected value
-                LocationContentView(content: marker)
-                        .presentationDetents([.height(175)])
+            .sheet(isPresented: $mapVM.showSearchView) {
+                MapSearchView()
             }
+            .overlay(alignment: .topTrailing) {
+               SearchableButtonView(mapVM: mapVM)
+            }
+            .overlay(alignment: .topLeading) {
+                Button("press me!!") { 
+                    print("i am pressed!!!")
+                }
+            }
+            
         }
         .task {
             await mapVM.initializeMarker()

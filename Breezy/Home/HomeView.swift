@@ -36,9 +36,6 @@ struct HomeView : View {
                 .environment(\.airQualityVM, homeVM)
                 .environment(\.historyVM, historyVM)
             }
-            .navigationDestination(item: $homeVM.searchedAQ) { data in
-                Text(data.aq.description)
-            }
         }
     }
 }

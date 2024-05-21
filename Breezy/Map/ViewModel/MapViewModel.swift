@@ -18,6 +18,10 @@ protocol MapViewProtocol: Observable, AnyObject {
     
     var markers: [CustomMarkerModel] { get }
     var selectedMarker: CustomMarkerModel? { get set }
+    
+    var showMarker : Bool { get set }
+    var showSearchView: Bool { get set }
+    
     func initializeMarker() async
     
     func configureLocationContent(coord: CLLocationCoordinate2D, setup: Bool) async
@@ -45,6 +49,9 @@ class MapViewModel: MapViewProtocol {
             }
         }
     }
+    
+    var showMarker : Bool = false
+    var showSearchView: Bool = false
     
     
     init(networkManager: any NetworkService, locationManager: any LocationService) {

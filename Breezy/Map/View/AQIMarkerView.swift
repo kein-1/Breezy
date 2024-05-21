@@ -26,6 +26,10 @@ struct AQIMarkerView<T: MapViewProtocol>: View {
                 .onTapGesture {
                     mapVM.selectedMarker = marker
                 }
+                .popover(item: $mapVM.selectedMarker, attachmentAnchor: .point(.top), arrowEdge: .top) { marker in // bind sheet to show based on selected value
+                    LocationContentView(content: marker)
+                    
+                }
         }
         
     }

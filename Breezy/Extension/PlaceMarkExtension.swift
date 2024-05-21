@@ -13,9 +13,9 @@ import Foundation
 extension Placemark {
     static let mockPlacemark: Self =
         Placemark(
-            name: "Golden Gate Bridge",
-            locality: "San Francisco",
-            administrativeArea: "California",
+            name: "New York",
+            locality: "New York",
+            administrativeArea: "NY",
             country: "United States"
         )
     

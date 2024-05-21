@@ -24,4 +24,5 @@ Notes :
 - MapReader allows MapKit to read user taps and convert it to coordinates in iOS 17
 - CoreLocationUI has an interesting new LocationButton feature
 - https://stackoverflow.com/questions/14214741/xcode-environment-variables-not-present-during-archive/74254208#74254208 - tip on storing API key for acess outside of Xcode (test flight / appstore ex)
-
+- SwiftUI seems to only allow one modal to be displayed at a time. Ran into a bug where my .sheet() and .popover() modals conflicted with each other, resulting in both not being displayed
+ 

@@ -15,21 +15,3 @@ struct CustomMarkerModel : Hashable, Identifiable {
     let placeMark: Placemark
 }
 
-
-extension CustomMarkerModel {
-    static let mockData: Self =
-    CustomMarkerModel(aq: AirQuality.mockAQ,
-                      coord: .newYork,
-                      placeMark: .mockPlacemark)
-    
-    static let mockDataArray: [Self] = [
-                    
-        CustomMarkerModel(aq: AirQuality.mockAQ,
-                          coord: .newYork,
-                          placeMark: .mockPlacemark),
-        
-        CustomMarkerModel(aq: AirQuality.mockAQ,
-                          coord: .boston,
-                          placeMark: .mockPlacemarkBoston)
-        ]
-}

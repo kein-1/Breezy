@@ -126,7 +126,7 @@ extension AirQuality : Hashable {
 extension AirQuality {
     static var mockAQ: Self =
         AirQuality(
-            coord: Coord(lon: 50.0, lat: 50.0),
+            coord: Coord(lon: 40.73, lat: -73.93),
             list: [
                 PrimaryData(
                     dt: Date(),

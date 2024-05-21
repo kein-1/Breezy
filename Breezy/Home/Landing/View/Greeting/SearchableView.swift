@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct SearchableView: View {
     
@@ -14,9 +15,13 @@ struct SearchableView: View {
     @Environment (\.airQualityVM) var homeVM
     @Environment (\.historyVM) var historyVM
     
+    let searchRequest = MKLocalSearch.Request()
+    
+    
     var body: some View {
         Button("press me ") {
             dismiss() // dismiss itself
+            homeVM.currAirQualityPlacemark = AirQualityPlacemark(aq: .mockAQ, placemark: .mockPlacemark)
         }
     }
 }

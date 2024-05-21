@@ -17,12 +17,11 @@ protocol Locateable : Observable, AnyObject {
     
     init(networkManager: NetworkService, locationManager: LocationService )
     
-    var currAirQualityPlacemark : AirQualityPlacemark?  { get }
+    var currAirQualityPlacemark : AirQualityPlacemark?  { get set }
     var currAirQuality: AirQuality { get }
     var currPlacemark: Placemark { get }
     
     var showCurrentLocationData: Bool { get set }
-    var searchedAQ: AirQualityPlacemark? { get set}
     
     func retrieveLocationAndUpdateData() async -> Void
     
@@ -42,15 +41,7 @@ class AQViewModel: Locateable {
         self.locationManager = locationManager
     }
     
-    var currAirQualityPlacemark: AirQualityPlacemark? {
-        didSet {
-            if self == nil {
-                print("i am nil now")
-            } else {
-                print("i am not nil")
-            }
-        }
-    }
+    var currAirQualityPlacemark: AirQualityPlacemark? 
     
     var currAirQuality : AirQuality {
         currAirQualityPlacemark?.aq ?? AirQuality.mockAQ
@@ -61,15 +52,6 @@ class AQViewModel: Locateable {
     }
     
     var showCurrentLocationData: Bool = false
-    var searchedAQ: AirQualityPlacemark? = nil {
-        didSet {
-            if self == nil {
-                print("i am nil now123")
-            } else {
-                print("i am not nil123")
-            }
-        }
-    }
     
     /// Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveLocationAndUpdateData() async {
@@ -80,7 +62,6 @@ class AQViewModel: Locateable {
         
         do {
             if locationManager.shouldUpdate  {
-                print("updating aq")
                 let (lat,lon) = (currentLocation.coordinate.latitude,currentLocation.coordinate.longitude)
                 
                 async let airQuality = networkManager.getPollutionData(lat: lat,lon: lon)

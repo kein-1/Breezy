@@ -45,3 +45,9 @@ struct PollutantSubCard: View {
         }
     }
 }
+
+
+#Preview {
+    PollutantSubCard(pollutantDetail: PollutantDetail(pollutantDescription: .co, value: 123, colorStr: "Green"))
+}
+

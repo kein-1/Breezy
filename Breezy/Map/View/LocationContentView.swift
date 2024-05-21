@@ -28,16 +28,19 @@ struct LocationContentView: View {
                     }
                 }
             }
-            .font(.system(size: 16))
+            .font(.system(size: 16).bold())
         }
         .padding()
         .background {
             RoundedRectangle(cornerRadius: 15)
-                .stroke(.red, lineWidth: 3)
+                .strokeBorder(ColorHelper.aqiColor(aqi: content.aq._aqi.0).opacity(0.7), lineWidth: 5)
         }
+        .presentationCompactAdaptation(.popover)
+        .presentationBackgroundInteraction(.enabled)
     }
+    
 }
-
-#Preview {
-    LocationContentView(content: .mockData)
-}
+//
+//#Preview {
+//    LocationContentView(content: .mockData)
+//}

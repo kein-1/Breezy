@@ -33,9 +33,6 @@ class MockAQViewModel: Locateable {
     }
     
     var showCurrentLocationData: Bool = false
-    var searchedAQ: AirQualityPlacemark?
-    
- 
     
     /// Mock Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveLocationAndUpdateData() async {
