@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import CoreLocation
 
 // MARK: - Home View's View Model
 @Observable
@@ -35,8 +35,10 @@ class MockAQViewModel: Locateable {
     var showCurrentLocationData: Bool = false
     
     /// Mock Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
-    func retrieveLocationAndUpdateData() async {
+    func retrieveCurrLocationAndUpdateData() async {
         guard let currentLocation = locationManager.manager.location else { return }
         
     }
+    
+    func retrieveLocationAndUpdateData(coordinate : CLLocationCoordinate2D) async {}
 }

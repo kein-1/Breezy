@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 
 // MARK: - Historical content view model protocol
@@ -21,7 +22,9 @@ protocol HistoricalDataProtocol : Observable, AnyObject {
     var currentHistory: TimeFrame { get set }
     var timeDifference: (start: TimeInterval, end: TimeInterval) { get }
     
-    func retrieveHistoricalData() async -> Void
+    func retrieveCurrentLocationHistoryData() async -> Void
+    func retrieveLocationHistoryData(coordinate: CLLocationCoordinate2D) async
+    
 }
 
 @Observable
@@ -65,7 +68,7 @@ class HistoryDataViewModel : HistoricalDataProtocol {
     }
     
     
-    func retrieveHistoricalData() async {
+    func retrieveCurrentLocationHistoryData() async {
         guard let currentLocation = locationManager.manager.location else { return }
         do {
             let (lat, lon) = (currentLocation.coordinate.latitude, currentLocation.coordinate.longitude)
@@ -79,6 +82,22 @@ class HistoryDataViewModel : HistoricalDataProtocol {
             print(error)
         }
     }
+    
+    func retrieveLocationHistoryData(coordinate: CLLocationCoordinate2D) async {
+        do {
+            let (lat, lon) = (coordinate.latitude, coordinate.longitude)
+            let airQuality = try await networkManager.getHistoricalData(lat: lat, lon: lon, start: self.timeDifference.0, end: self.timeDifference.1)
+            self.historicalData = airQuality
+        } catch NetworkErrors.invalidRequest {
+            print("error in network call")
+        } catch APIErrors.invalidAPIKey {
+            print("error in api-key")
+        } catch {
+            print(error)
+        }
+    }
+    
+    
     
     
     

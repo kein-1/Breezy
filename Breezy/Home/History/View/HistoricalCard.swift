@@ -34,7 +34,7 @@ struct HistoricalCard : View {
         }
         .padding()
         .task {
-            await historyVM.retrieveHistoricalData()
+            await historyVM.retrieveCurrentLocationHistoryData()
         }
         
     }

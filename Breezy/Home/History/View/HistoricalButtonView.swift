@@ -19,7 +19,7 @@ struct HistoricalButtonView : View {
                 withAnimation {
                     historyVM.currentHistory = time
                 }
-                await historyVM.retrieveHistoricalData()
+                await historyVM.retrieveCurrentLocationHistoryData()
             }
         } label: {
             Text(title)

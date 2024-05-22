@@ -10,14 +10,14 @@ import SwiftUI
 struct ButtonStackView : View {
     
     @Environment (\.airQualityVM) var homeVM
-    @State var showSheet = false
+    @State private var showSheet = false
     
     var body: some View {
         VStack(spacing: 20) {
             Button {
                 homeVM.showCurrentLocationData.toggle()
                 Task {
-                    await homeVM.retrieveLocationAndUpdateData()
+                    await homeVM.retrieveCurrLocationAndUpdateData()
                 }
             } label: {
                CustomLabelView(title: "Get current location", sysImg: "location")

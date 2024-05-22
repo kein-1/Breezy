@@ -42,8 +42,7 @@ struct GreetingView : View {
         .padding()
     }
 }
-//
-//#Preview {
-//    @State var homeVM = MockAQViewModel(networkManager: NetworkManager(), locationManager: LocationManager.shared)
-//    return GreetingView(homeVM: homeVM, showData: .constant(false))
-//}
+
+#Preview {
+    return GreetingView()
+}

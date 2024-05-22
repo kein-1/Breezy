@@ -37,16 +37,14 @@ class MockMapViewModel: MapViewProtocol {
     }
     
     var cameraPosition : MapCameraPosition = MapCameraPosition.region(.init(center: .newYork, latitudinalMeters: 50, longitudinalMeters: 50))
-    func updateCameraPosition() {
-        
-    }
+    func updateCameraPosition(new center: CLLocationCoordinate2D) {}
     
     
     /// Sets up the custom marker
     /// - Parameters:
     ///   - coord: The location coordiante
     ///   - setup: Either the first time it is rendered or not
-    func configureLocationContent(coord: CLLocationCoordinate2D, setup: Bool) async {
+    func configureLocationContent(coord: CLLocationCoordinate2D) async {
         
     }
 }

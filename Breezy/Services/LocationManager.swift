@@ -15,7 +15,6 @@ protocol LocationService {
     var manager : CLLocationManager { get }
     var threshold : CLLocationDistance { get }
     var shouldUpdate : Bool { get }
-    
     func performGeoReverse(lat: CLLocationDegrees, lon: CLLocationDegrees) async throws -> Placemark
 }
 
@@ -97,14 +96,13 @@ extension LocationManager : CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+        print("location error" , error)
     }
     
     
     /// Runs when the location manager is first created and when
     /// - Parameter manager: the location manager
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        print("running auth delegate")
         checkAuthorization()
     }
 }

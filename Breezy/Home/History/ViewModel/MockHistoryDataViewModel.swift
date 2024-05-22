@@ -6,10 +6,14 @@
 //
 
 import Foundation
+import CoreLocation
 
-// MARK: - Mock history view model 
+
+// MARK: - Mock history view model
 @Observable
 class MockHistoryDataViewModel : HistoricalDataProtocol {
+    
+    
     
     
     var networkManager : any NetworkService
@@ -50,7 +54,7 @@ class MockHistoryDataViewModel : HistoricalDataProtocol {
     }
     
     
-    func retrieveHistoricalData() async {
+    func retrieveCurrentLocationHistoryData() async {
         guard let currentLocation = locationManager.manager.location else { return }
         do {
             let (lon,lat) = (currentLocation.coordinate.longitude, currentLocation.coordinate.latitude)
@@ -60,4 +64,6 @@ class MockHistoryDataViewModel : HistoricalDataProtocol {
             print(error)
         }
     }
+    
+    func retrieveLocationHistoryData(coordinate: CLLocationCoordinate2D) async { }
 }

@@ -59,6 +59,8 @@
 		8CD585A62BFC39080072C742 /* MapSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD585A52BFC39080072C742 /* MapSearchView.swift */; };
 		8CD585A82BFC3F8A0072C742 /* CustomMarkerModelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD585A72BFC3F8A0072C742 /* CustomMarkerModelExtension.swift */; };
 		8CD585AA2BFC4E9B0072C742 /* SearchableButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD585A92BFC4E9A0072C742 /* SearchableButtonView.swift */; };
+		8CD585AC2BFD89760072C742 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD585AB2BFD89760072C742 /* SearchManager.swift */; };
+		8CD585AE2BFD8F960072C742 /* CustomSearchTextStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD585AD2BFD8F960072C742 /* CustomSearchTextStyling.swift */; };
 		8CF261B12BEBE0ED002214FF /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261B02BEBE0ED002214FF /* MapViewModel.swift */; };
 		8CF261B42BED5B3C002214FF /* CoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261B32BED5B3B002214FF /* CoordinateExtension.swift */; };
 		8CF261B62BEEC859002214FF /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF261B52BEEC859002214FF /* MockNetworkManager.swift */; };
@@ -142,6 +144,8 @@
 		8CD585A52BFC39080072C742 /* MapSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchView.swift; sourceTree = "<group>"; };
 		8CD585A72BFC3F8A0072C742 /* CustomMarkerModelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerModelExtension.swift; sourceTree = "<group>"; };
 		8CD585A92BFC4E9A0072C742 /* SearchableButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableButtonView.swift; sourceTree = "<group>"; };
+		8CD585AB2BFD89760072C742 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
+		8CD585AD2BFD8F960072C742 /* CustomSearchTextStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextStyling.swift; sourceTree = "<group>"; };
 		8CF261B02BEBE0ED002214FF /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		8CF261B32BED5B3B002214FF /* CoordinateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateExtension.swift; sourceTree = "<group>"; };
 		8CF261B52BEEC859002214FF /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				8C0C6B732BD1D5C1001738DA /* CustomProgressViewStyling.swift */,
+				8CD585AD2BFD8F960072C742 /* CustomSearchTextStyling.swift */,
 			);
 			path = CustomStyling;
 			sourceTree = "<group>";
@@ -405,6 +410,7 @@
 				8CF261B52BEEC859002214FF /* MockNetworkManager.swift */,
 				8C7B978D2BB67B08005A7712 /* LocationManager.swift */,
 				8CF261B72BEEC866002214FF /* MockLocationManager.swift */,
+				8CD585AB2BFD89760072C742 /* SearchManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -643,6 +649,7 @@
 				8CF261B82BEEC866002214FF /* MockLocationManager.swift in Sources */,
 				8C6BB5EB2BE6974C000EF77A /* GreetingView.swift in Sources */,
 				8C6BB5E82BE49CA5000EF77A /* MockHistoryDataViewModel.swift in Sources */,
+				8CD585AE2BFD8F960072C742 /* CustomSearchTextStyling.swift in Sources */,
 				8CD5859E2BFA89500072C742 /* LocateableKey.swift in Sources */,
 				8C0C6B7B2BD23209001738DA /* PollutantDescription.swift in Sources */,
 				8CD585952BFA772B0072C742 /* AirQualityExtension.swift in Sources */,
@@ -664,6 +671,7 @@
 				8C6BB5D62BDB14A0000EF77A /* TimeFrame.swift in Sources */,
 				8C7B978E2BB67B08005A7712 /* LocationManager.swift in Sources */,
 				8C5CBFEF2BB38454004080B9 /* BreezyApp.swift in Sources */,
+				8CD585AC2BFD89760072C742 /* SearchManager.swift in Sources */,
 				8CD585A02BFAA0CB0072C742 /* HistoryKey.swift in Sources */,
 				8CD5858E2BF948C40072C742 /* MapViewOld.swift in Sources */,
 				8C0C6B6F2BCDC143001738DA /* PollutantCard.swift in Sources */,

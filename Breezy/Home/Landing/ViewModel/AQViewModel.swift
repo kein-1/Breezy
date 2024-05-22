@@ -23,8 +23,8 @@ protocol Locateable : Observable, AnyObject {
     
     var showCurrentLocationData: Bool { get set }
     
-    func retrieveLocationAndUpdateData() async -> Void
-    
+    func retrieveCurrLocationAndUpdateData() async
+    func retrieveLocationAndUpdateData(coordinate : CLLocationCoordinate2D) async
 }
 
 
@@ -54,7 +54,7 @@ class AQViewModel: Locateable {
     var showCurrentLocationData: Bool = false
     
     /// Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
-    func retrieveLocationAndUpdateData() async {
+    func retrieveCurrLocationAndUpdateData() async {
         guard let currentLocation = locationManager.manager.location else {
             print("error")
             return
@@ -63,7 +63,6 @@ class AQViewModel: Locateable {
         do {
             if locationManager.shouldUpdate  {
                 let (lat,lon) = (currentLocation.coordinate.latitude,currentLocation.coordinate.longitude)
-                
                 async let airQuality = networkManager.getPollutionData(lat: lat,lon: lon)
                 async let placemark = locationManager.performGeoReverse(lat: lat, lon: lon)
                 
@@ -75,6 +74,24 @@ class AQViewModel: Locateable {
             print("error in network call")
         } catch APIErrors.invalidAPIKey {
             print("error in api-key")
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    /// Retrieves the specified location, updates it with air quality data, and performs geoReverse on that location
+    func retrieveLocationAndUpdateData(coordinate: CLLocationCoordinate2D) async {
+      
+        do {
+            let (lat,lon) = (coordinate.latitude, coordinate.longitude)
+            print("the lat lon is ", lat,lon)
+            async let airQuality = networkManager.getPollutionData(lat: lat,lon: lon)
+            async let placemark = locationManager.performGeoReverse(lat: lat, lon: lon)
+            
+            let (aq,place) = try await (airQuality, placemark)
+            
+            self.currAirQualityPlacemark = AirQualityPlacemark(aq: aq, placemark: place)
         } catch {
             print(error)
         }
