@@ -56,7 +56,6 @@ class AQViewModel: Locateable {
     /// Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveCurrLocationAndUpdateData() async {
         guard let currentLocation = locationManager.manager.location else {
-            print("error")
             return
         }
         
@@ -85,12 +84,9 @@ class AQViewModel: Locateable {
       
         do {
             let (lat,lon) = (coordinate.latitude, coordinate.longitude)
-            print("the lat lon is ", lat,lon)
             async let airQuality = networkManager.getPollutionData(lat: lat,lon: lon)
             async let placemark = locationManager.performGeoReverse(lat: lat, lon: lon)
-            
             let (aq,place) = try await (airQuality, placemark)
-            
             self.currAirQualityPlacemark = AirQualityPlacemark(aq: aq, placemark: place)
         } catch {
             print(error)

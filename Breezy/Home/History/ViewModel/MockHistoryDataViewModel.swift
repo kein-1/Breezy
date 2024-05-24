@@ -14,8 +14,6 @@ import CoreLocation
 class MockHistoryDataViewModel : HistoricalDataProtocol {
     
     
-    
-    
     var networkManager : any NetworkService
     var locationManager: any LocationService
     

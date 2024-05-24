@@ -74,9 +74,8 @@ class NetworkManager: NetworkService {
         }
         
         
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
-        let airQuality = try decoder.decode(AirQuality.self, from: data)
+        self.decoder.dateDecodingStrategy = .secondsSince1970
+        let airQuality = try self.decoder.decode(AirQuality.self, from: data)
         return airQuality
     }
 }

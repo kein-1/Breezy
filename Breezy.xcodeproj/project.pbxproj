@@ -46,7 +46,6 @@
 		8C7B97852BB62188005A7712 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B97842BB62188005A7712 /* HomeView.swift */; };
 		8C7B978E2BB67B08005A7712 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7B978D2BB67B08005A7712 /* LocationManager.swift */; };
 		8CD5858C2BF945220072C742 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5858B2BF945220072C742 /* LocationContentView.swift */; };
-		8CD5858E2BF948C40072C742 /* MapViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5858D2BF948C40072C742 /* MapViewOld.swift */; };
 		8CD585902BF94A790072C742 /* MockMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5858F2BF94A790072C742 /* MockMapViewModel.swift */; };
 		8CD585952BFA772B0072C742 /* AirQualityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD585942BFA772B0072C742 /* AirQualityExtension.swift */; };
 		8CD585972BFA77410072C742 /* PlaceMarkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD585962BFA77410072C742 /* PlaceMarkExtension.swift */; };
@@ -135,7 +134,6 @@
 		8C7B97842BB62188005A7712 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8C7B978D2BB67B08005A7712 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8CD5858B2BF945220072C742 /* LocationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationContentView.swift; sourceTree = "<group>"; };
-		8CD5858D2BF948C40072C742 /* MapViewOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewOld.swift; sourceTree = "<group>"; };
 		8CD5858F2BF94A790072C742 /* MockMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMapViewModel.swift; sourceTree = "<group>"; };
 		8CD585942BFA772B0072C742 /* AirQualityExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirQualityExtension.swift; sourceTree = "<group>"; };
 		8CD585962BFA77410072C742 /* PlaceMarkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMarkExtension.swift; sourceTree = "<group>"; };
@@ -487,7 +485,6 @@
 			isa = PBXGroup;
 			children = (
 				8C6BB5EF2BEADBC8000EF77A /* MapView.swift */,
-				8CD5858D2BF948C40072C742 /* MapViewOld.swift */,
 				8CF261BF2BF029B4002214FF /* AQIMarkerView.swift */,
 				8CD5858B2BF945220072C742 /* LocationContentView.swift */,
 				8CD585A52BFC39080072C742 /* MapSearchView.swift */,
@@ -697,7 +694,6 @@
 				8C5CBFEF2BB38454004080B9 /* BreezyApp.swift in Sources */,
 				8CD585AC2BFD89760072C742 /* SearchManager.swift in Sources */,
 				8CD585A02BFAA0CB0072C742 /* HistoryKey.swift in Sources */,
-				8CD5858E2BF948C40072C742 /* MapViewOld.swift in Sources */,
 				8C0C6B6F2BCDC143001738DA /* PollutantCard.swift in Sources */,
 				8CD585A42BFAF7F40072C742 /* SearchableView.swift in Sources */,
 				8C0C6B7D2BD99076001738DA /* GaugeCard.swift in Sources */,

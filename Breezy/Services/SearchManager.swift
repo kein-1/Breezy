@@ -50,7 +50,6 @@ class SearchManager: NSObject, SearchService {
     }
     
     
-    
     /// Initiates a MKLocaalSearch
     /// - Parameter searchContent: the search content struct we provide
     /// - Returns: an optional CLLOcationCoordinate
@@ -61,8 +60,6 @@ class SearchManager: NSObject, SearchService {
             print("error in local search ")
             return nil
         }
-        print(result.boundingRegion)
-        print(result.mapItems)
         return result.boundingRegion.center
     }
 }

@@ -12,7 +12,7 @@ struct ContentView: View {
     @State var selectedTab : Tab = .house
     
     init() {
-        // TabView creates some space that we don't need so use this
+        // TabView creates some space that we don't need so use this. Also hides the default tab bar on the bottom, allowing us to use a customized tab bar
         UITabBar.appearance().isHidden = true
     }
     

@@ -42,17 +42,14 @@ struct SearchableView: View {
                                 print("error in search vm")
                                 return
                             }
-                            
                             async let aq: Void = homeVM.retrieveLocationAndUpdateData(coordinate: coordinate)
                             async let hist: Void = historyVM.retrieveLocationHistoryData(coordinate: coordinate)
-                            
                             _ = await (aq,hist)
                             dismiss()
                         }
                     } label: {
                         Text("\(searchContent.title) , \(searchContent.subTitle)")
                             .customTextStyle()
-                            
                     }
                 }
                 .listRowBackground(Color.clear)
