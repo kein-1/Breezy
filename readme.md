@@ -1,5 +1,5 @@
 ## Introduction
-Breezy keeps you informed about the air you breathe with real-time air quality data. Whether you're planning your day, exercising outdoors, or concerned about pollution, Breezy helps you make informed decisions with up-to-the-minute AQI updates 
+Breezy keeps you informed about the air you breathe with real-time air quality data. Whether you're planning your day, exercising outdoors, or concerned about pollution, Breezy helps you make informed decisions with up-to-the-minute AQI updates. It's built entirely in SwiftUI, making it fast, lightweight, and easy to use !
 
 
 
