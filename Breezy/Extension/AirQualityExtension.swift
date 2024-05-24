@@ -63,20 +63,6 @@ extension AirQuality {
         self.list[0].dt
     }
     
-    var color: String {
-        switch self._aqi.0 {
-            case 1:
-                "Green"
-            case 2:
-                "Teal"
-            case 3:
-                "Orange"
-            case 4:
-                "Purple"
-            default:
-                "Red"
-            }
-    }
     
     var description: String {
         switch self._aqi.0 {
@@ -95,12 +81,12 @@ extension AirQuality {
     
     var pollutantDetail : [PollutantDetail] {
         [
-            PollutantDetail(pollutantDescription: .pm25, value: self._pm25, colorStr: self.color),
-            PollutantDetail(pollutantDescription: .pm10, value: self._pm10, colorStr: self.color),
-            PollutantDetail(pollutantDescription: .so2, value: self._so2, colorStr: self.color),
-            PollutantDetail(pollutantDescription: .no2, value: self._no2, colorStr: self.color),
-            PollutantDetail(pollutantDescription: .o3, value: self._o3, colorStr: self.color),
-            PollutantDetail(pollutantDescription: .co, value: self._co, colorStr: self.color)
+            PollutantDetail(pollutantDescription: .pm25, value: self._pm25, aqi: self._aqi.0),
+            PollutantDetail(pollutantDescription: .pm10, value: self._pm10, aqi: self._aqi.0),
+            PollutantDetail(pollutantDescription: .so2, value: self._so2, aqi: self._aqi.0),
+            PollutantDetail(pollutantDescription: .no2, value: self._no2, aqi: self._aqi.0),
+            PollutantDetail(pollutantDescription: .o3, value: self._o3, aqi: self._aqi.0),
+            PollutantDetail(pollutantDescription: .co, value: self._co, aqi: self._aqi.0)
         ]
     }
 }

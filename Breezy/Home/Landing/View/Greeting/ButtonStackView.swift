@@ -23,9 +23,7 @@ struct ButtonStackView : View {
                CustomLabelView(title: "Get current location", sysImg: "location")
             }
             Button {
-                // TODO:
                 showSheet.toggle()
-                
             } label: {
                 CustomLabelView(title: "Search or enter address", sysImg: "magnifyingglass")
             }

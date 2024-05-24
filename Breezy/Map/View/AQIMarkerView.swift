@@ -12,6 +12,7 @@ struct AQIMarkerView<T: MapViewProtocol>: View {
     @Bindable var mapVM : T
     let marker : CustomMarkerModel
     
+    @State private var isChanged = false
     
     var body: some View {
         VStack {
@@ -22,19 +23,25 @@ struct AQIMarkerView<T: MapViewProtocol>: View {
                 .background {
                     Circle()
                         .fill(ColorHelper.aqiColor(aqi: marker.aq._aqi.0))
+                        
                 }
                 .onTapGesture {
                     mapVM.selectedMarker = marker
+                    isChanged.toggle()
                 }
-                .popover(item: $mapVM.selectedMarker, attachmentAnchor: .point(.top), arrowEdge: .top) { marker in // bind sheet to show based on selected value
-                    LocationContentView(content: marker)
-                    
+                .phaseAnimator([false, true,false,true,false], trigger: isChanged) { content, phase in
+                    content.offset(y: phase ? -40.0 : 0.0)
                 }
         }
-        
     }
 }
 //
 //#Preview {
 //    AQIMarkerView(marker: CustomMarkerModel.mockData)
 //}
+
+//
+//    .popover(item: $mapVM.selectedMarker) { marker in // bind sheet to show based on selected value
+//        LocationContentView(content: marker)
+//        
+//    }

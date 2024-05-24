@@ -10,5 +10,6 @@ import Foundation
 struct PollutantDetail : Hashable {
     let pollutantDescription : PollutantDescription
     let value : Double
-    let colorStr: String
+    let aqi: Int
+    
 }

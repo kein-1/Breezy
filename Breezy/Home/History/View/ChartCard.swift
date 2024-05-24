@@ -27,6 +27,7 @@ struct ChartCard : View {
         }
         .chartScrollPosition(initialX: 3)
     }
+       
 }
 //
 //#Preview {

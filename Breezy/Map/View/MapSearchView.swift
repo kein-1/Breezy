@@ -40,10 +40,7 @@ struct MapSearchView<T: MapViewProtocol>: View {
                                 print("error in content")
                                 return
                             }
-                            print("dismiss!!!")
-                            print(coord)
-                            await mapVM.configureLocationContent(coord: coord)
-                            print("its over!!!")
+                            await mapVM.configureLocationContent(coord: coord, setup: false)
                             dismiss()
                         }
                     } label: {

@@ -30,7 +30,14 @@ struct MapView: View {
                 MapSearchView(mapVM: mapVM)
             }
             .overlay(alignment: .topTrailing) {
-               SearchableButtonView(mapVM: mapVM)
+               MapButtonsView(mapVM: mapVM)
+            }
+//            .overlay(mapVM.selectedMarker == nil ? nil : LocationContentView(content: mapVM.selectedMarker!))
+            
+            .sheet(item: $mapVM.selectedMarker) {
+                mapVM.selectedMarker = nil
+            } content: { marker in
+                LocationContentView(content: marker)
             }
         }
         .task {
@@ -42,10 +49,9 @@ struct MapView: View {
 #Preview {
     MapView()
 }
-
 //
-//
-//.sheet(isPresented: $mapVM.sheetSelection) {
-//    LocationContent(content: mapVM.selectedMarker!)
-//        .presentationDetents([.height(175)])
+//.sheet(item: $mapVM.selectedMarker) {
+//    mapVM.selectedMarker = nil
+//} content: { marker in
+//    LocationContentView(content: marker)
 //}

@@ -15,20 +15,16 @@ protocol MapViewProtocol: Observable, AnyObject {
     
     var networkManager : any NetworkService { get }
     var locationManager : any LocationService { get }
-    
     var markers: [CustomMarkerModel] { get }
     var selectedMarker: CustomMarkerModel? { get set }
-    
+    var userLocationMarker: CustomMarkerModel? { get set }
     var showMarker : Bool { get set }
     var showSearchView: Bool { get set }
-    
     var cameraPosition : MapCameraPosition { get set }
-    
     func initializeMarker() async
-    
-    func configureLocationContent(coord: CLLocationCoordinate2D) async
-    
-    func updateCameraPosition(new center: CLLocationCoordinate2D) 
+    func configureLocationContent(coord: CLLocationCoordinate2D, setup: Bool) async
+    func updateCameraPosition(new center: CLLocationCoordinate2D)
+    func resetToCurr() 
     
 }
 
@@ -40,7 +36,7 @@ class MapViewModel: MapViewProtocol {
     let locationManager:  any LocationService
     var markers = [CustomMarkerModel]()
     
-    var selectedMarker: CustomMarkerModel? = nil {
+    var selectedMarker: CustomMarkerModel? {
         didSet {
             if selectedMarker == nil {
                 print("changed to nil ")
@@ -48,7 +44,16 @@ class MapViewModel: MapViewProtocol {
                 print("not nil")
             }
         }
+        willSet {
+            if newValue == nil {
+                print("I am going to be nil ")
+            } else {
+                print("i am going to be a new value so not nil")
+            }
+        }
     }
+    
+    var userLocationMarker: CustomMarkerModel?
     
     var showMarker : Bool = false
     var showSearchView: Bool = false
@@ -62,16 +67,15 @@ class MapViewModel: MapViewProtocol {
     
     func initializeMarker() async {
         guard let location = locationManager.manager.location else {
-            print("no last")
             self.selectedMarker = CustomMarkerModel.mockData
             return
         }
-        await configureLocationContent(coord: location.coordinate)
+        await configureLocationContent(coord: location.coordinate, setup: true)
     }
     
     
     func updateCameraPosition(new center: CLLocationCoordinate2D) {
-        cameraPosition = MapCameraPosition.region(.init(center: center, latitudinalMeters: 250, longitudinalMeters: 250))
+        cameraPosition = MapCameraPosition.region(.init(center: center, latitudinalMeters: 500000, longitudinalMeters: 500000))
     }
     
     
@@ -79,7 +83,7 @@ class MapViewModel: MapViewProtocol {
     /// - Parameters:
     ///   - coord: The location coordiante
     ///   - setup: Either the first time it is rendered or not
-    func configureLocationContent(coord: CLLocationCoordinate2D) async {
+    func configureLocationContent(coord: CLLocationCoordinate2D, setup: Bool) async {
         
         do {
             let (lat,lon) = (coord.latitude,coord.longitude)
@@ -90,10 +94,22 @@ class MapViewModel: MapViewProtocol {
             
             let customMarkerModel = CustomMarkerModel(aq: aq, coord: coord, placeMark: pm)
             markers.append(customMarkerModel)
-            updateCameraPosition(new: coord)
             self.selectedMarker = customMarkerModel
+            
+            if setup {
+                userLocationMarker = customMarkerModel
+            }
+            
+            updateCameraPosition(new: coord)
         } catch {
             print(error)
         }
     }
+    
+    func resetToCurr() {
+        self.selectedMarker = userLocationMarker
+        cameraPosition = MapCameraPosition.userLocation(fallback: .automatic)
+    }
+    
+    
 }

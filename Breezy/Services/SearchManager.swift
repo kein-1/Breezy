@@ -64,9 +64,7 @@ class SearchManager: NSObject, SearchService {
         print(result.boundingRegion)
         print(result.mapItems)
         return result.boundingRegion.center
-       
     }
-    
 }
 
 extension SearchManager : MKLocalSearchCompleterDelegate {
@@ -82,5 +80,4 @@ extension SearchManager : MKLocalSearchCompleterDelegate {
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         print("Search failed", error)
     }
-    
 }

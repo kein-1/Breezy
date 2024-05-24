@@ -14,6 +14,8 @@ import _MapKit_SwiftUI
 @Observable
 class MockMapViewModel: MapViewProtocol {
     
+    
+    
     let networkManager: any NetworkService
     let locationManager:  any LocationService
     var markers = [CustomMarkerModel]()
@@ -22,6 +24,7 @@ class MockMapViewModel: MapViewProtocol {
     
     var showMarker : Bool = false
     var showSearchView: Bool = false
+    var userLocationMarker: CustomMarkerModel?
     
     
     init(networkManager: any NetworkService, locationManager: any LocationService) {
@@ -44,7 +47,12 @@ class MockMapViewModel: MapViewProtocol {
     /// - Parameters:
     ///   - coord: The location coordiante
     ///   - setup: Either the first time it is rendered or not
-    func configureLocationContent(coord: CLLocationCoordinate2D) async {
+    func configureLocationContent(coord: CLLocationCoordinate2D, setup: Bool) async {
         
     }
+    
+    func resetToCurr() {
+        
+    }
+    
 }

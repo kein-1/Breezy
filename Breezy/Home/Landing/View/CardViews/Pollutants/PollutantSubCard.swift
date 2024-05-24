@@ -30,7 +30,7 @@ struct PollutantSubCard: View {
             .frame(minWidth: 50, maxWidth: .infinity)
             
             ProgressView(value: pollutantDetail.value, total: pollutantDetail.value + 1)
-                .tint(ColorHelper.pollutantColor(colorString: pollutantDetail.colorStr))
+                .tint(ColorHelper.aqiColor(aqi: pollutantDetail.aqi))
                 .progressViewStyle(.myCustomStyle)
                 .frame(minWidth: 0, maxWidth: .infinity)
                       
@@ -48,6 +48,6 @@ struct PollutantSubCard: View {
 
 
 #Preview {
-    PollutantSubCard(pollutantDetail: PollutantDetail(pollutantDescription: .co, value: 123, colorStr: "Green"))
+    PollutantSubCard(pollutantDetail: PollutantDetail(pollutantDescription: .co, value: 123, aqi: 5))
 }
 

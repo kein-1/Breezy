@@ -14,31 +14,17 @@ class ColorHelper {
         var color : Color
         
         switch aqi {
-            case 1,2:
-                color = Color.green
+            case 1:
+                color = Color.levelOneColor
+            case 2:
+                color = Color.levelTwoColor
             case 3:
-                color = Color.orange
+                color = Color.levelThreeColor
             case 4:
-                color = Color.purple
+                color = Color.levelFourColor
             default:
-                color = Color.red
+                color = Color.levelFiveColor
         }
         return color
     }
-    
-    static func pollutantColor(colorString: String) -> Color {
-        switch colorString {
-            case "Green":
-                Color.green
-            case "Teal":
-                Color.teal
-            case "Orange":
-                Color.orange
-            case "Purple":
-                Color.purple
-            default:
-                Color.red
-        }
-    }
-    
 }

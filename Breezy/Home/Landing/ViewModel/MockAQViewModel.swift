@@ -22,7 +22,7 @@ class MockAQViewModel: Locateable {
         self.locationManager = locationManager
     }
     
-    var currAirQualityPlacemark: AirQualityPlacemark?
+    var currAirQualityPlacemark: AirQualityPlacemark? = .init(aq: .mockAQ, placemark: .mockPlacemark)
     
     var currAirQuality : AirQuality {
         currAirQualityPlacemark?.aq ?? AirQuality.mockAQ
@@ -37,7 +37,6 @@ class MockAQViewModel: Locateable {
     /// Mock Retrieves the current location, updates it with air quality data, and performs geoReverse on that location
     func retrieveCurrLocationAndUpdateData() async {
         guard let currentLocation = locationManager.manager.location else { return }
-        
     }
     
     func retrieveLocationAndUpdateData(coordinate : CLLocationCoordinate2D) async {}

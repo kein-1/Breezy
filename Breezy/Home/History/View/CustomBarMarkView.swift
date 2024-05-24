@@ -12,18 +12,6 @@ import Charts
 struct CustomBarMarkView: ChartContent {
     
     let primaryData: PrimaryData
-    var color: Color {
-        switch primaryData.main.aqi {
-            case 1,2:
-                Color.green
-            case 3:
-                Color.orange
-            case 4:
-                Color.purple
-            default:
-                Color.red
-        }
-    }
     
     var body : some ChartContent {
         BarMark(
@@ -33,7 +21,7 @@ struct CustomBarMarkView: ChartContent {
                     .month(.twoDigits))),
             y: .value("Pollutants", primaryData.main.aqi)
         )
-        .foregroundStyle(color.gradient.opacity(0.7))
+        .foregroundStyle(ColorHelper.aqiColor(aqi: primaryData.main.aqi))
         .cornerRadius(10)
     }
 }

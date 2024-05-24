@@ -48,6 +48,7 @@ class HistoryDataViewModel : HistoricalDataProtocol {
             let dateStr = data.dt.formatted(.dateTime.day().month().year())
             if set.insert(dateStr).inserted { primaryData.append(data) }
         }
+        
         return primaryData.sorted(by: { $0.dt < $1.dt })
     }
     
