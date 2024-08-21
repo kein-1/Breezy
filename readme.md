@@ -6,24 +6,21 @@ Breezy keeps you informed about the air you breathe with real-time air quality d
 
 ## Features:
 
-### Data views:
-<img src="Breezy/AppImages/Group1.jpg" height=600px/>  
+### Content views:
+
+<p align="center">
+  <img src="Breezy/AppImages/Screen1.gif" width="30%" />
+  <img src="Breezy/AppImages/Screen2.gif" width="30%" />
+  <img src="Breezy/AppImages/Screen3.gif" width="30%" />
+</p>
 
 - **User-Friendly Interface:** Easy-to-use and simple interface with smooth navigation and custom navigation bar  
 - **Real-Time Location-Based AQI:** Fetches your current location and displays the AQI with detailed pop-over pollutant information   
 - **Historical Data:** View air quality trends with historical data by week, month, and year
 - **Pollutant Breakdown:** Detailed breakdown of six major key pollutants: PM2.5, PM10, NO2, O3, CO, and SO2
-
-
-### Explore/Search:
-<img src="Breezy/AppImages/Group2.jpg" height=600px/>  
-
 - **Interactive Map View:** Fully viewable map with AQI annotations and searchable features, allowing you to explore air quality in different areas
 - **Clickable Annotations** Instantly access air quality index (AQI) and location details by tapping on map annotations." 
 - **Search Functionality:** Search for air quality information in any location around the world  
-
-
-
 ---
 
 ##### App design, architecture, and design considerations:
